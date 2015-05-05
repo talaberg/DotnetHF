@@ -20,7 +20,7 @@ namespace NyilvForms
         public MainWindow()
         {
             InitializeComponent();
-            //GetAllClients();
+            GetAllClients();
         }
 
         private void btFind_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace NyilvForms
                 var resp = client.GetAsync("http://localhost:5112/api/Alapadatok/all").Result;
                 resp.EnsureSuccessStatusCode();
 
-                var adat = resp.Content.ReadAsAsync<DbSet<Alapadatok>>().Result;
+                var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
 
                 foreach (var ceg in adat)
                 {

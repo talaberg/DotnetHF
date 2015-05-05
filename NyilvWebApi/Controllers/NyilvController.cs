@@ -35,12 +35,17 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                var ceg = ctx.Alapadatok;
-                if (ceg == null)
+                var cegek = new List<Alapadatok>();
+                foreach (var ceg in ctx.Alapadatok)
+                {
+                    cegek.Add(ceg);
+                    
+                }
+                if (cegek == null)
                 {
                     return NotFound();
                 }
-                return Ok(ceg);
+                return Ok(cegek);
 
             }
         }
