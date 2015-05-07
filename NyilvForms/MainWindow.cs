@@ -61,20 +61,7 @@ namespace NyilvForms
         //      Database  ----------------------------------------------------------------------------------------------------------------------------------------------
         private void btFind_Click(object sender, EventArgs e)
         {
-            ComboBoxElementItem Item = (ComboBoxElementItem)comboBoxFindElement.SelectedItem;
-            ComboBoxConditionItem ItemCondition = (ComboBoxConditionItem)comboBoxFindCondiditon.SelectedItem;
-
-            var query = new MyQuery() {Item2Find = Item.Name, Condition = ItemCondition.Condition, Value = textBoxFind.Text};
-            
-            using (var client = new HttpClient())
-            {
-                var resp = client.PutAsJsonAsync(ControllerFindAlapadat.ControllerUrl, query).Result;
-                resp.EnsureSuccessStatusCode();
-
-                var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
-                UpdateAlapadatokField(adat);
-                UpdateCegadatokAndDokumentumok(adat.First().CegID);
-            }
+            RunFindQUery();
         }
 
         //      UI event  ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -149,7 +136,6 @@ namespace NyilvForms
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(ControllerGetCegadatokById.ControllerUrl(ID)).Result;
-                resp.EnsureSuccessStatusCode();
 
                 var adat = resp.Content.ReadAsAsync<Cegadatok>().Result;
 
@@ -158,8 +144,7 @@ namespace NyilvForms
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(ControllerGetDokumentumokById.ControllerUrl(ID)).Result;
-                resp.EnsureSuccessStatusCode();
-
+  
                 var adat = resp.Content.ReadAsAsync<List<Dokumentumok>>().Result;
 
                 UpdateDokumentumokField(adat);
@@ -180,6 +165,39 @@ namespace NyilvForms
 
                 return adat;
             } 
+        }
+
+        void RunFindQUery()
+        {
+            if (textBoxFind.Text != "")
+            {
+                ComboBoxElementItem Item = (ComboBoxElementItem)comboBoxFindElement.SelectedItem;
+                ComboBoxConditionItem ItemCondition = (ComboBoxConditionItem)comboBoxFindCondiditon.SelectedItem;
+
+                var query = new MyQuery() { Item2Find = Item.Name, Condition = ItemCondition.Condition, Value = textBoxFind.Text };
+
+                using (var client = new HttpClient())
+                {
+                    var resp = client.PutAsJsonAsync(ControllerFindAlapadat.ControllerUrl, query).Result;
+                    resp.EnsureSuccessStatusCode();
+
+                    var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
+                    
+                    
+                    if(adat.Count != 0) 
+                    {
+                        UpdateAlapadatokField(adat);
+                        UpdateCegadatokAndDokumentumok(adat.First().CegID);                        
+                    }
+                    else
+                    {
+                        treeViewDokumentumok.Nodes.Clear();
+                        alapadatokBindingSource.Clear();
+                        cegadatokBindingSource.Clear();
+                    }
+                        
+                }
+            }
         }
 
         void ComboBoxFindElementInit()
@@ -217,7 +235,45 @@ namespace NyilvForms
             comboBoxFindCondiditon.SelectedIndex = 0;
         }
 
+        private void DataGridView_DataError(object sender, DataGridViewDataErrorEventArgs anError)
+        {
 
+            MessageBox.Show("Error happened " + anError.Context.ToString());
+
+            if (anError.Context == DataGridViewDataErrorContexts.Commit)
+            {
+                MessageBox.Show("Commit error");
+            }
+            if (anError.Context == DataGridViewDataErrorContexts.CurrentCellChange)
+            {
+                MessageBox.Show("Cell change");
+            }
+            if (anError.Context == DataGridViewDataErrorContexts.Parsing)
+            {
+                MessageBox.Show("parsing error");
+            }
+            if (anError.Context == DataGridViewDataErrorContexts.LeaveControl)
+            {
+                MessageBox.Show("leave control error");
+            }
+
+            if ((anError.Exception) is ConstraintException)
+            {
+                DataGridView view = (DataGridView)sender;
+                view.Rows[anError.RowIndex].ErrorText = "an error";
+                view.Rows[anError.RowIndex].Cells[anError.ColumnIndex].ErrorText = "an error";
+
+                anError.ThrowException = false;
+            }
+        }
+
+        private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                RunFindQUery();
+            }
+        }
 
 
 

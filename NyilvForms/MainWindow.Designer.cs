@@ -65,6 +65,10 @@
             this.telefonTextBox = new System.Windows.Forms.TextBox();
             this.telephelyTextBox = new System.Windows.Forms.TextBox();
             this.treeViewDokumentumok = new System.Windows.Forms.TreeView();
+            this.textBoxFind = new System.Windows.Forms.TextBox();
+            this.labelCegKeres = new System.Windows.Forms.Label();
+            this.comboBoxFindElement = new System.Windows.Forms.ComboBox();
+            this.comboBoxFindCondiditon = new System.Windows.Forms.ComboBox();
             this.alapadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,10 +78,6 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cegadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.textBoxFind = new System.Windows.Forms.TextBox();
-            this.labelCegKeres = new System.Windows.Forms.Label();
-            this.comboBoxFindElement = new System.Windows.Forms.ComboBox();
-            this.comboBoxFindCondiditon = new System.Windows.Forms.ComboBox();
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -401,6 +401,7 @@
             this.alapadatokDataGridView.Size = new System.Drawing.Size(554, 411);
             this.alapadatokDataGridView.TabIndex = 0;
             this.alapadatokDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellClick);
+            this.alapadatokDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView_DataError);
             // 
             // splitContainerJobbOldal
             // 
@@ -478,6 +479,40 @@
             this.treeViewDokumentumok.Size = new System.Drawing.Size(244, 307);
             this.treeViewDokumentumok.TabIndex = 0;
             // 
+            // textBoxFind
+            // 
+            this.textBoxFind.Location = new System.Drawing.Point(390, 9);
+            this.textBoxFind.Name = "textBoxFind";
+            this.textBoxFind.Size = new System.Drawing.Size(100, 20);
+            this.textBoxFind.TabIndex = 5;
+            this.textBoxFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxFind_KeyDown);
+            // 
+            // labelCegKeres
+            // 
+            this.labelCegKeres.AutoSize = true;
+            this.labelCegKeres.Location = new System.Drawing.Point(42, 11);
+            this.labelCegKeres.Name = "labelCegKeres";
+            this.labelCegKeres.Size = new System.Drawing.Size(75, 13);
+            this.labelCegKeres.TabIndex = 6;
+            this.labelCegKeres.Text = "Cég keresése:";
+            // 
+            // comboBoxFindElement
+            // 
+            this.comboBoxFindElement.FormattingEnabled = true;
+            this.comboBoxFindElement.Location = new System.Drawing.Point(134, 9);
+            this.comboBoxFindElement.Name = "comboBoxFindElement";
+            this.comboBoxFindElement.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFindElement.TabIndex = 9;
+            this.comboBoxFindElement.SelectedIndexChanged += new System.EventHandler(this.comboBoxFindElement_SelectedIndexChanged);
+            // 
+            // comboBoxFindCondiditon
+            // 
+            this.comboBoxFindCondiditon.FormattingEnabled = true;
+            this.comboBoxFindCondiditon.Location = new System.Drawing.Point(261, 9);
+            this.comboBoxFindCondiditon.Name = "comboBoxFindCondiditon";
+            this.comboBoxFindCondiditon.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFindCondiditon.TabIndex = 10;
+            // 
             // alapadatokBindingSource
             // 
             this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
@@ -527,39 +562,6 @@
             // cegadatokBindingSource
             // 
             this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
-            // 
-            // textBoxFind
-            // 
-            this.textBoxFind.Location = new System.Drawing.Point(390, 9);
-            this.textBoxFind.Name = "textBoxFind";
-            this.textBoxFind.Size = new System.Drawing.Size(100, 20);
-            this.textBoxFind.TabIndex = 5;
-            // 
-            // labelCegKeres
-            // 
-            this.labelCegKeres.AutoSize = true;
-            this.labelCegKeres.Location = new System.Drawing.Point(42, 11);
-            this.labelCegKeres.Name = "labelCegKeres";
-            this.labelCegKeres.Size = new System.Drawing.Size(75, 13);
-            this.labelCegKeres.TabIndex = 6;
-            this.labelCegKeres.Text = "Cég keresése:";
-            // 
-            // comboBoxFindElement
-            // 
-            this.comboBoxFindElement.FormattingEnabled = true;
-            this.comboBoxFindElement.Location = new System.Drawing.Point(134, 9);
-            this.comboBoxFindElement.Name = "comboBoxFindElement";
-            this.comboBoxFindElement.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxFindElement.TabIndex = 9;
-            this.comboBoxFindElement.SelectedIndexChanged += new System.EventHandler(this.comboBoxFindElement_SelectedIndexChanged);
-            // 
-            // comboBoxFindCondiditon
-            // 
-            this.comboBoxFindCondiditon.FormattingEnabled = true;
-            this.comboBoxFindCondiditon.Location = new System.Drawing.Point(261, 9);
-            this.comboBoxFindCondiditon.Name = "comboBoxFindCondiditon";
-            this.comboBoxFindCondiditon.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxFindCondiditon.TabIndex = 10;
             // 
             // MainWindow
             // 
