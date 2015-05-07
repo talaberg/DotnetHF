@@ -71,17 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Alapadatok.cs" />
-    <Compile Include="Entities\Cegadatok.cs" />
-    <Compile Include="Entities\Dokumentumok.cs" />
-    <Compile Include="Entities\ModelNyilv.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainWindow.resx">
@@ -99,13 +94,12 @@
     <None Include="CodeTemplates\EFModelFromDatabase\Context.cs.t4" />
     <None Include="CodeTemplates\EFModelFromDatabase\EntityType.cs.t4" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\NyilvForms.Entities.Alapadatok.datasource" />
-    <None Include="Properties\DataSources\NyilvForms.Entities.Cegadatok.datasource" />
-    <None Include="Properties\DataSources\NyilvForms.Entities.Dokumentumok.datasource" />
-    <None Include="Properties\DataSources\NyilvForms.Entities.ModelNyilv.datasource" />
-    <None Include="Properties\DataSources\NyilvForms.Migrations.Configuration.datasource" />
     <None Include="Properties\DataSources\NyilvForms.Properties.Resources.datasource" />
     <None Include="Properties\DataSources\NyilvForms.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\NyilvLib.Entities.Alapadatok.datasource" />
+    <None Include="Properties\DataSources\NyilvLib.Entities.Cegadatok.datasource" />
+    <None Include="Properties\DataSources\NyilvLib.Entities.Dokumentumok.datasource" />
+    <None Include="Properties\DataSources\NyilvLib.Entities.ModelNyilv.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -121,7 +115,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NyilvLib\NyilvLib.csproj">
+      <Project>{2592d3af-1293-4d1d-85c5-a950c0e3e413}</Project>
+      <Name>NyilvLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

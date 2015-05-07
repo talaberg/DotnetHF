@@ -1,4 +1,4 @@
-namespace NyilvForms.Entities
+namespace NyilvLib.Entities
 {
     using System;
     using System.Data.Entity;

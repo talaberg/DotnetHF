@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Entities\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -143,10 +144,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NyilvController.cs" />
-    <Compile Include="Entities\Alapadatok.cs" />
-    <Compile Include="Entities\Cegadatok.cs" />
-    <Compile Include="Entities\Dokumentumok.cs" />
-    <Compile Include="Entities\ModelNyilv.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,7 +194,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\NyilvLib\NyilvLib.csproj">
+      <Project>{2592d3af-1293-4d1d-85c5-a950c0e3e413}</Project>
+      <Name>NyilvLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

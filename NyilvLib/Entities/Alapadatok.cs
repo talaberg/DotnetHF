@@ -1,4 +1,4 @@
-namespace NyilvForms.Entities
+namespace NyilvLib.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -29,6 +29,5 @@ namespace NyilvForms.Entities
         public string Hivatkozas { get; set; }
 
         public bool? Felfuggesztett { get; set; }
-
     }
 }
