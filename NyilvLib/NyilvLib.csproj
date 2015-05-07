@@ -53,6 +53,7 @@
     <Compile Include="Entities\ModelNyilv.cs" />
     <Compile Include="Entities\Dokumentumok.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MyQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApi.cs" />
   </ItemGroup>

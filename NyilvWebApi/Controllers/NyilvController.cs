@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Nyilv.Entities;
 using System.Web;
+using NyilvLib;
+using NyilvLib.Entities;
+using System.Data.Entity;
 
 namespace Nyilv.Controllers
 {
@@ -14,8 +16,8 @@ namespace Nyilv.Controllers
 
         // GET api/Alapadatok/{id}
         [HttpGet]
-        [Route("api/Alapadatok/{id}", Name = "GetAlapadatokUrl")]
-        public IHttpActionResult Get(int id)
+        [Route(ControllerGetAlapadatById.ControllerFormat, Name = ControllerGetAlapadatById.ControllerName)]
+        public IHttpActionResult GetAlapadatok(int id)
         {
             using (var ctx = new  ModelNyilv())
             {
@@ -28,9 +30,42 @@ namespace Nyilv.Controllers
                 
             }
         }
+        // GET api/Cegadatok/{id}
+        [HttpGet]
+        [Route(ControllerGetCegadatokById.ControllerFormat, Name = ControllerGetCegadatokById.ControllerName)]
+        public IHttpActionResult GetCegadatok(int id)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                var ceg = ctx.Cegadatok.SingleOrDefault(c => c.CegID == id);
+                if (ceg == null)
+                {
+                    return NotFound();
+                }
+                return Ok(ceg);
+
+            }
+        }
+
+        // GET api/Dokumentumok/{id}
+        [HttpGet]
+        [Route(ControllerGetDokumentumokById.ControllerFormat, Name = ControllerGetDokumentumokById.ControllerName)]
+        public IHttpActionResult GetDokumentumok(int id)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                var doc = ctx.Dokumentumok.Where(c => c.CegID == id).ToList<Dokumentumok>();
+                if (doc == null)
+                {
+                    return NotFound();
+                }
+                return Ok(doc);
+
+            }
+        }
         // GET api/Alapadatok/all
         [HttpGet]
-        [Route("api/Alapadatok/all")]
+        [Route(ControllerGetAlapadatAll.ControllerFormat)]
         public IHttpActionResult GetAll()
         {
             using (var ctx = new ModelNyilv())
@@ -46,29 +81,37 @@ namespace Nyilv.Controllers
                     return NotFound();
                 }
                 return Ok(cegek);
-
             }
         }
-
+        
         // PUT: api/Alapadatok/find
         [HttpPut]
-        [Route("api/Alapadatok/find")]
-        public IHttpActionResult Put([FromBody]Alapadatok value)
+        [Route(ControllerFindAlapadat.ControllerFormat)]
+        public IHttpActionResult Put([FromBody]MyQuery query)
         {
             using (var ctx = new ModelNyilv())
             {
-                var ceg = ctx.Alapadatok.SingleOrDefault(c => c.Cegnev == value.Cegnev);
-                if (ceg == null)
+                List<Alapadatok> result = null;
+                switch (query.Condition)
+	            {
+                    case MyQuery.EqualsCondition :
+                        result = ctx.Alapadatok.Where(c => query.Item2Find == query.Value).ToList();
+                        break;
+		            default:
+                        break;
+	            }
+
+                if (result == null)
                 {
                     return NotFound();
                 }
-                return Ok(ceg);
+                return Ok(result);
 
             }
         }
 
         [HttpPost]
-        [Route("api/import")]
+        [Route(ControllerImport.ControllerFormat)]
         public HttpResponseMessage Post()
         {
             HttpResponseMessage result = null;

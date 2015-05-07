@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label ceg_teljes_nevLabel;
+            System.Windows.Forms.Label emailLabel;
+            System.Windows.Forms.Label telefonLabel;
+            System.Windows.Forms.Label telephelyLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.btFind = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -56,6 +60,11 @@
             this.alapadatokDataGridView = new System.Windows.Forms.DataGridView();
             this.splitContainerJobbOldal = new System.Windows.Forms.SplitContainer();
             this.panelCegAdat = new System.Windows.Forms.Panel();
+            this.ceg_teljes_nevTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.telefonTextBox = new System.Windows.Forms.TextBox();
+            this.telephelyTextBox = new System.Windows.Forms.TextBox();
+            this.treeViewDokumentumok = new System.Windows.Forms.TreeView();
             this.alapadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,10 +74,14 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cegadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ceg_teljes_nevLabel1 = new System.Windows.Forms.Label();
-            this.emailLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.telefonLabel1 = new System.Windows.Forms.Label();
-            this.telephelyLabel1 = new System.Windows.Forms.Label();
+            this.textBoxFind = new System.Windows.Forms.TextBox();
+            this.labelCegKeres = new System.Windows.Forms.Label();
+            this.comboBoxFindElement = new System.Windows.Forms.ComboBox();
+            this.comboBoxFindCondiditon = new System.Windows.Forms.ComboBox();
+            ceg_teljes_nevLabel = new System.Windows.Forms.Label();
+            emailLabel = new System.Windows.Forms.Label();
+            telefonLabel = new System.Windows.Forms.Label();
+            telephelyLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panelGombok.SuspendLayout();
             this.tableLayoutPanelWorkspace.SuspendLayout();
@@ -85,19 +98,56 @@
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerJobbOldal)).BeginInit();
             this.splitContainerJobbOldal.Panel1.SuspendLayout();
+            this.splitContainerJobbOldal.Panel2.SuspendLayout();
             this.splitContainerJobbOldal.SuspendLayout();
             this.panelCegAdat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
+            // ceg_teljes_nevLabel
+            // 
+            ceg_teljes_nevLabel.AutoSize = true;
+            ceg_teljes_nevLabel.Location = new System.Drawing.Point(3, 26);
+            ceg_teljes_nevLabel.Name = "ceg_teljes_nevLabel";
+            ceg_teljes_nevLabel.Size = new System.Drawing.Size(47, 13);
+            ceg_teljes_nevLabel.TabIndex = 0;
+            ceg_teljes_nevLabel.Text = "Cégnév:";
+            // 
+            // emailLabel
+            // 
+            emailLabel.AutoSize = true;
+            emailLabel.Location = new System.Drawing.Point(3, 52);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new System.Drawing.Size(38, 13);
+            emailLabel.TabIndex = 2;
+            emailLabel.Text = "E-mail:";
+            // 
+            // telefonLabel
+            // 
+            telefonLabel.AutoSize = true;
+            telefonLabel.Location = new System.Drawing.Point(2, 78);
+            telefonLabel.Name = "telefonLabel";
+            telefonLabel.Size = new System.Drawing.Size(46, 13);
+            telefonLabel.TabIndex = 4;
+            telefonLabel.Text = "Telefon:";
+            // 
+            // telephelyLabel
+            // 
+            telephelyLabel.AutoSize = true;
+            telephelyLabel.Location = new System.Drawing.Point(3, 101);
+            telephelyLabel.Name = "telephelyLabel";
+            telephelyLabel.Size = new System.Drawing.Size(56, 13);
+            telephelyLabel.TabIndex = 6;
+            telephelyLabel.Text = "Telephely:";
+            // 
             // btFind
             // 
-            this.btFind.Location = new System.Drawing.Point(403, 2);
+            this.btFind.Location = new System.Drawing.Point(496, 6);
             this.btFind.Name = "btFind";
             this.btFind.Size = new System.Drawing.Size(75, 23);
             this.btFind.TabIndex = 1;
-            this.btFind.Text = "Find";
+            this.btFind.Text = "Keresés";
             this.btFind.UseVisualStyleBackColor = true;
             this.btFind.Click += new System.EventHandler(this.btFind_Click);
             // 
@@ -133,22 +183,26 @@
             // 
             // buttonLoadAll
             // 
-            this.buttonLoadAll.Location = new System.Drawing.Point(563, 2);
+            this.buttonLoadAll.Location = new System.Drawing.Point(709, 3);
             this.buttonLoadAll.Name = "buttonLoadAll";
-            this.buttonLoadAll.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadAll.Size = new System.Drawing.Size(84, 23);
             this.buttonLoadAll.TabIndex = 4;
-            this.buttonLoadAll.Text = "Load all";
+            this.buttonLoadAll.Text = "Minden ügyfél";
             this.buttonLoadAll.UseVisualStyleBackColor = true;
             this.buttonLoadAll.Click += new System.EventHandler(this.buttonLoadAll_Click);
             // 
             // panelGombok
             // 
+            this.panelGombok.Controls.Add(this.comboBoxFindCondiditon);
+            this.panelGombok.Controls.Add(this.comboBoxFindElement);
+            this.panelGombok.Controls.Add(this.labelCegKeres);
+            this.panelGombok.Controls.Add(this.textBoxFind);
             this.panelGombok.Controls.Add(this.btFind);
             this.panelGombok.Controls.Add(this.buttonLoadAll);
             this.panelGombok.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelGombok.Location = new System.Drawing.Point(3, 3);
             this.panelGombok.Name = "panelGombok";
-            this.panelGombok.Size = new System.Drawing.Size(802, 24);
+            this.panelGombok.Size = new System.Drawing.Size(802, 55);
             this.panelGombok.TabIndex = 6;
             // 
             // tableLayoutPanelWorkspace
@@ -162,8 +216,8 @@
             this.tableLayoutPanelWorkspace.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanelWorkspace.Name = "tableLayoutPanelWorkspace";
             this.tableLayoutPanelWorkspace.RowCount = 2;
-            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.042885F));
-            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.95712F));
+            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.89084F));
+            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.10916F));
             this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 447F));
             this.tableLayoutPanelWorkspace.Size = new System.Drawing.Size(808, 513);
             this.tableLayoutPanelWorkspace.TabIndex = 7;
@@ -171,7 +225,7 @@
             // splitContainerAdatok
             // 
             this.splitContainerAdatok.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerAdatok.Location = new System.Drawing.Point(3, 33);
+            this.splitContainerAdatok.Location = new System.Drawing.Point(3, 64);
             this.splitContainerAdatok.Name = "splitContainerAdatok";
             // 
             // splitContainerAdatok.Panel1
@@ -181,7 +235,7 @@
             // splitContainerAdatok.Panel2
             // 
             this.splitContainerAdatok.Panel2.Controls.Add(this.splitContainerJobbOldal);
-            this.splitContainerAdatok.Size = new System.Drawing.Size(802, 477);
+            this.splitContainerAdatok.Size = new System.Drawing.Size(802, 446);
             this.splitContainerAdatok.SplitterDistance = 554;
             this.splitContainerAdatok.TabIndex = 7;
             // 
@@ -200,8 +254,8 @@
             // 
             this.splitContainerBalOldal.Panel2.AutoScroll = true;
             this.splitContainerBalOldal.Panel2.Controls.Add(this.alapadatokDataGridView);
-            this.splitContainerBalOldal.Size = new System.Drawing.Size(554, 477);
-            this.splitContainerBalOldal.SplitterDistance = 34;
+            this.splitContainerBalOldal.Size = new System.Drawing.Size(554, 446);
+            this.splitContainerBalOldal.SplitterDistance = 31;
             this.splitContainerBalOldal.TabIndex = 8;
             // 
             // alapadatokBindingNavigator
@@ -344,8 +398,9 @@
             this.alapadatokDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.alapadatokDataGridView.Location = new System.Drawing.Point(0, 0);
             this.alapadatokDataGridView.Name = "alapadatokDataGridView";
-            this.alapadatokDataGridView.Size = new System.Drawing.Size(554, 439);
-            this.alapadatokDataGridView.TabIndex = 1;
+            this.alapadatokDataGridView.Size = new System.Drawing.Size(554, 411);
+            this.alapadatokDataGridView.TabIndex = 0;
+            this.alapadatokDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellClick);
             // 
             // splitContainerJobbOldal
             // 
@@ -357,27 +412,75 @@
             // splitContainerJobbOldal.Panel1
             // 
             this.splitContainerJobbOldal.Panel1.Controls.Add(this.panelCegAdat);
-            this.splitContainerJobbOldal.Size = new System.Drawing.Size(244, 477);
-            this.splitContainerJobbOldal.SplitterDistance = 145;
+            // 
+            // splitContainerJobbOldal.Panel2
+            // 
+            this.splitContainerJobbOldal.Panel2.Controls.Add(this.treeViewDokumentumok);
+            this.splitContainerJobbOldal.Size = new System.Drawing.Size(244, 446);
+            this.splitContainerJobbOldal.SplitterDistance = 135;
             this.splitContainerJobbOldal.TabIndex = 0;
             // 
             // panelCegAdat
             // 
             this.panelCegAdat.AutoScroll = true;
             this.panelCegAdat.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.panelCegAdat.Controls.Add(this.ceg_teljes_nevLabel1);
-            this.panelCegAdat.Controls.Add(this.emailLinkLabel);
-            this.panelCegAdat.Controls.Add(this.telefonLabel1);
-            this.panelCegAdat.Controls.Add(this.telephelyLabel1);
+            this.panelCegAdat.Controls.Add(ceg_teljes_nevLabel);
+            this.panelCegAdat.Controls.Add(this.ceg_teljes_nevTextBox);
+            this.panelCegAdat.Controls.Add(emailLabel);
+            this.panelCegAdat.Controls.Add(this.emailTextBox);
+            this.panelCegAdat.Controls.Add(telefonLabel);
+            this.panelCegAdat.Controls.Add(this.telefonTextBox);
+            this.panelCegAdat.Controls.Add(telephelyLabel);
+            this.panelCegAdat.Controls.Add(this.telephelyTextBox);
             this.panelCegAdat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCegAdat.Location = new System.Drawing.Point(0, 0);
             this.panelCegAdat.Name = "panelCegAdat";
-            this.panelCegAdat.Size = new System.Drawing.Size(244, 145);
+            this.panelCegAdat.Size = new System.Drawing.Size(244, 135);
             this.panelCegAdat.TabIndex = 0;
+            // 
+            // ceg_teljes_nevTextBox
+            // 
+            this.ceg_teljes_nevTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Ceg_teljes_nev", true));
+            this.ceg_teljes_nevTextBox.Location = new System.Drawing.Point(65, 23);
+            this.ceg_teljes_nevTextBox.Name = "ceg_teljes_nevTextBox";
+            this.ceg_teljes_nevTextBox.Size = new System.Drawing.Size(170, 20);
+            this.ceg_teljes_nevTextBox.TabIndex = 1;
+            // 
+            // emailTextBox
+            // 
+            this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Email", true));
+            this.emailTextBox.Location = new System.Drawing.Point(65, 49);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(170, 20);
+            this.emailTextBox.TabIndex = 3;
+            // 
+            // telefonTextBox
+            // 
+            this.telefonTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Telefon", true));
+            this.telefonTextBox.Location = new System.Drawing.Point(65, 75);
+            this.telefonTextBox.Name = "telefonTextBox";
+            this.telefonTextBox.Size = new System.Drawing.Size(170, 20);
+            this.telefonTextBox.TabIndex = 5;
+            // 
+            // telephelyTextBox
+            // 
+            this.telephelyTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Telephely", true));
+            this.telephelyTextBox.Location = new System.Drawing.Point(65, 101);
+            this.telephelyTextBox.Name = "telephelyTextBox";
+            this.telephelyTextBox.Size = new System.Drawing.Size(170, 20);
+            this.telephelyTextBox.TabIndex = 7;
+            // 
+            // treeViewDokumentumok
+            // 
+            this.treeViewDokumentumok.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewDokumentumok.Location = new System.Drawing.Point(0, 0);
+            this.treeViewDokumentumok.Name = "treeViewDokumentumok";
+            this.treeViewDokumentumok.Size = new System.Drawing.Size(244, 307);
+            this.treeViewDokumentumok.TabIndex = 0;
             // 
             // alapadatokBindingSource
             // 
-            this.alapadatokBindingSource.DataSource = typeof(NyilvForms.Entities.Alapadatok);
+            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -423,44 +526,40 @@
             // 
             // cegadatokBindingSource
             // 
-            this.cegadatokBindingSource.DataSource = typeof(NyilvForms.Entities.Cegadatok);
+            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
             // 
-            // ceg_teljes_nevLabel1
+            // textBoxFind
             // 
-            this.ceg_teljes_nevLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Ceg_teljes_nev", true));
-            this.ceg_teljes_nevLabel1.Location = new System.Drawing.Point(44, 26);
-            this.ceg_teljes_nevLabel1.Name = "ceg_teljes_nevLabel1";
-            this.ceg_teljes_nevLabel1.Size = new System.Drawing.Size(100, 23);
-            this.ceg_teljes_nevLabel1.TabIndex = 1;
-            this.ceg_teljes_nevLabel1.Text = "label1";
+            this.textBoxFind.Location = new System.Drawing.Point(390, 9);
+            this.textBoxFind.Name = "textBoxFind";
+            this.textBoxFind.Size = new System.Drawing.Size(100, 20);
+            this.textBoxFind.TabIndex = 5;
             // 
-            // emailLinkLabel
+            // labelCegKeres
             // 
-            this.emailLinkLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Email", true));
-            this.emailLinkLabel.Location = new System.Drawing.Point(44, 49);
-            this.emailLinkLabel.Name = "emailLinkLabel";
-            this.emailLinkLabel.Size = new System.Drawing.Size(100, 23);
-            this.emailLinkLabel.TabIndex = 3;
-            this.emailLinkLabel.TabStop = true;
-            this.emailLinkLabel.Text = "linkLabel1";
+            this.labelCegKeres.AutoSize = true;
+            this.labelCegKeres.Location = new System.Drawing.Point(42, 11);
+            this.labelCegKeres.Name = "labelCegKeres";
+            this.labelCegKeres.Size = new System.Drawing.Size(75, 13);
+            this.labelCegKeres.TabIndex = 6;
+            this.labelCegKeres.Text = "Cég keresése:";
             // 
-            // telefonLabel1
+            // comboBoxFindElement
             // 
-            this.telefonLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Telefon", true));
-            this.telefonLabel1.Location = new System.Drawing.Point(44, 72);
-            this.telefonLabel1.Name = "telefonLabel1";
-            this.telefonLabel1.Size = new System.Drawing.Size(100, 23);
-            this.telefonLabel1.TabIndex = 5;
-            this.telefonLabel1.Text = "label1";
+            this.comboBoxFindElement.FormattingEnabled = true;
+            this.comboBoxFindElement.Location = new System.Drawing.Point(134, 9);
+            this.comboBoxFindElement.Name = "comboBoxFindElement";
+            this.comboBoxFindElement.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFindElement.TabIndex = 9;
+            this.comboBoxFindElement.SelectedIndexChanged += new System.EventHandler(this.comboBoxFindElement_SelectedIndexChanged);
             // 
-            // telephelyLabel1
+            // comboBoxFindCondiditon
             // 
-            this.telephelyLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Telephely", true));
-            this.telephelyLabel1.Location = new System.Drawing.Point(44, 95);
-            this.telephelyLabel1.Name = "telephelyLabel1";
-            this.telephelyLabel1.Size = new System.Drawing.Size(100, 23);
-            this.telephelyLabel1.TabIndex = 7;
-            this.telephelyLabel1.Text = "label1";
+            this.comboBoxFindCondiditon.FormattingEnabled = true;
+            this.comboBoxFindCondiditon.Location = new System.Drawing.Point(261, 9);
+            this.comboBoxFindCondiditon.Name = "comboBoxFindCondiditon";
+            this.comboBoxFindCondiditon.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFindCondiditon.TabIndex = 10;
             // 
             // MainWindow
             // 
@@ -475,6 +574,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelGombok.ResumeLayout(false);
+            this.panelGombok.PerformLayout();
             this.tableLayoutPanelWorkspace.ResumeLayout(false);
             this.splitContainerAdatok.Panel1.ResumeLayout(false);
             this.splitContainerAdatok.Panel2.ResumeLayout(false);
@@ -490,9 +590,11 @@
             this.alapadatokBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokDataGridView)).EndInit();
             this.splitContainerJobbOldal.Panel1.ResumeLayout(false);
+            this.splitContainerJobbOldal.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerJobbOldal)).EndInit();
             this.splitContainerJobbOldal.ResumeLayout(false);
             this.panelCegAdat.ResumeLayout(false);
+            this.panelCegAdat.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -502,7 +604,6 @@
 
         #endregion
 
-        private System.Windows.Forms.BindingSource alapadatokBindingSource;
         private System.Windows.Forms.Button btFind;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fajlToolStripMenuItem;
@@ -511,7 +612,6 @@
         private System.Windows.Forms.Button buttonLoadAll;
         private System.Windows.Forms.Panel panelGombok;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelWorkspace;
-        private System.Windows.Forms.BindingSource cegadatokBindingSource;
         private System.Windows.Forms.SplitContainer splitContainerAdatok;
         private System.Windows.Forms.SplitContainer splitContainerBalOldal;
         private System.Windows.Forms.BindingNavigator alapadatokBindingNavigator;
@@ -527,7 +627,16 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripButton alapadatokBindingNavigatorSaveItem;
+        private System.Windows.Forms.SplitContainer splitContainerJobbOldal;
+        private System.Windows.Forms.Panel panelCegAdat;
         private System.Windows.Forms.DataGridView alapadatokDataGridView;
+        private System.Windows.Forms.BindingSource alapadatokBindingSource;
+        private System.Windows.Forms.TextBox ceg_teljes_nevTextBox;
+        private System.Windows.Forms.BindingSource cegadatokBindingSource;
+        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox telefonTextBox;
+        private System.Windows.Forms.TextBox telephelyTextBox;
+        private System.Windows.Forms.TreeView treeViewDokumentumok;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -535,12 +644,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.SplitContainer splitContainerJobbOldal;
-        private System.Windows.Forms.Panel panelCegAdat;
-        private System.Windows.Forms.Label ceg_teljes_nevLabel1;
-        private System.Windows.Forms.LinkLabel emailLinkLabel;
-        private System.Windows.Forms.Label telefonLabel1;
-        private System.Windows.Forms.Label telephelyLabel1;
+        private System.Windows.Forms.Label labelCegKeres;
+        private System.Windows.Forms.TextBox textBoxFind;
+        private System.Windows.Forms.ComboBox comboBoxFindCondiditon;
+        private System.Windows.Forms.ComboBox comboBoxFindElement;
     }
 }
 

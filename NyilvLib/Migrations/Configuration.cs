@@ -1,18 +1,18 @@
-namespace NyilvForms.Migrations
+namespace NyilvLib.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<NyilvForms.Entities.ModelNyilv>
+    internal sealed class Configuration : DbMigrationsConfiguration<NyilvLib.Entities.ModelNyilv>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(NyilvForms.Entities.ModelNyilv context)
+        protected override void Seed(NyilvLib.Entities.ModelNyilv context)
         {
             //  This method will be called after migrating to the latest version.
 
