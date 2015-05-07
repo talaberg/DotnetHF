@@ -20,7 +20,7 @@ namespace NyilvForms
         public MainWindow()
         {
             InitializeComponent();
-            GetAllClients();
+            
         }
 
         private void btFind_Click(object sender, EventArgs e)
@@ -32,6 +32,7 @@ namespace NyilvForms
                 resp.EnsureSuccessStatusCode();
 
                 var adat = resp.Content.ReadAsAsync<Alapadatok>().Result;
+                alapadatokBindingSource.Clear();
                 alapadatokBindingSource.Add(adat as Alapadatok);
             }
         }
@@ -53,7 +54,7 @@ namespace NyilvForms
                 alapadatokBindingSource.Add(adat as Alapadatok);*/
             }
         }
-        private void GetAllClients()
+        List<Alapadatok> GetAllClients()
         {
             var a = new { Cegnev = "Y" };
             using (var client = new HttpClient())
@@ -63,14 +64,21 @@ namespace NyilvForms
 
                 var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
 
-                foreach (var ceg in adat)
-                {
-                    var newNode = new TreeNode(ceg.Cegnev){Tag = ceg.CegID};
-                    //newNode.Nodes.Add("");
-                    treeViewCeg.Nodes.Add(newNode);
-                }
+                return adat;
             }
  
+        }
+
+        private void buttonLoadAll_Click(object sender, EventArgs e)
+        {
+            alapadatokBindingSource.Clear();
+
+            List<Alapadatok> ClientList = GetAllClients();
+
+            foreach (Alapadatok client in ClientList)
+            {
+                alapadatokBindingSource.Add(client);
+            }
         }
     }
 }
