@@ -18,6 +18,7 @@ namespace NyilvForms
 {
     public partial class MainWindow : Form
     {
+        bool dataGridViewCellChanged;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +33,8 @@ namespace NyilvForms
 
             ComboBoxFindElementInit();
             comboBoxFindCondiditon.ValueMember = "Name";
+
+            dataGridViewCellChanged = false;
 
         }
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,6 +89,26 @@ namespace NyilvForms
 
             ComboBoxFindConditionUpdate(ItemTypeCode);
 
+        }
+        private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                RunFindQUery();
+            }
+        }
+        private void alapadatokDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewCellChanged = true;
+        }
+
+        private void alapadatokDataGridView_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewCellChanged)
+            {
+                UpdateAlapadatokDatabase((Alapadatok)alapadatokDataGridView.Rows[e.RowIndex].DataBoundItem);
+                dataGridViewCellChanged = false;
+            }
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -267,13 +290,19 @@ namespace NyilvForms
             }
         }
 
-        private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
+        void UpdateAlapadatokDatabase(Alapadatok data)
         {
-            if (e.KeyCode == Keys.Enter)
+            using (var client = new HttpClient())
             {
-                RunFindQUery();
+                var resp = client.PostAsJsonAsync(ControllerUpdateAlapadat.ControllerUrl, data).Result;
+                resp.EnsureSuccessStatusCode();
             }
+ 
         }
+
+
+
+
 
 
 

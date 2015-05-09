@@ -41,11 +41,16 @@
             this.ofdImport = new System.Windows.Forms.OpenFileDialog();
             this.buttonLoadAll = new System.Windows.Forms.Button();
             this.panelGombok = new System.Windows.Forms.Panel();
+            this.comboBoxFindCondiditon = new System.Windows.Forms.ComboBox();
+            this.comboBoxFindElement = new System.Windows.Forms.ComboBox();
+            this.labelCegKeres = new System.Windows.Forms.Label();
+            this.textBoxFind = new System.Windows.Forms.TextBox();
             this.tableLayoutPanelWorkspace = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainerAdatok = new System.Windows.Forms.SplitContainer();
             this.splitContainerBalOldal = new System.Windows.Forms.SplitContainer();
             this.alapadatokBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.alapadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -58,18 +63,6 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.alapadatokBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.alapadatokDataGridView = new System.Windows.Forms.DataGridView();
-            this.splitContainerJobbOldal = new System.Windows.Forms.SplitContainer();
-            this.panelCegAdat = new System.Windows.Forms.Panel();
-            this.ceg_teljes_nevTextBox = new System.Windows.Forms.TextBox();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.telefonTextBox = new System.Windows.Forms.TextBox();
-            this.telephelyTextBox = new System.Windows.Forms.TextBox();
-            this.treeViewDokumentumok = new System.Windows.Forms.TreeView();
-            this.textBoxFind = new System.Windows.Forms.TextBox();
-            this.labelCegKeres = new System.Windows.Forms.Label();
-            this.comboBoxFindElement = new System.Windows.Forms.ComboBox();
-            this.comboBoxFindCondiditon = new System.Windows.Forms.ComboBox();
-            this.alapadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +70,14 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainerJobbOldal = new System.Windows.Forms.SplitContainer();
+            this.panelCegAdat = new System.Windows.Forms.Panel();
+            this.ceg_teljes_nevTextBox = new System.Windows.Forms.TextBox();
             this.cegadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.telefonTextBox = new System.Windows.Forms.TextBox();
+            this.telephelyTextBox = new System.Windows.Forms.TextBox();
+            this.treeViewDokumentumok = new System.Windows.Forms.TreeView();
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -95,13 +95,13 @@
             this.splitContainerBalOldal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingNavigator)).BeginInit();
             this.alapadatokBindingNavigator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerJobbOldal)).BeginInit();
             this.splitContainerJobbOldal.Panel1.SuspendLayout();
             this.splitContainerJobbOldal.Panel2.SuspendLayout();
             this.splitContainerJobbOldal.SuspendLayout();
             this.panelCegAdat.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -205,6 +205,40 @@
             this.panelGombok.Size = new System.Drawing.Size(802, 55);
             this.panelGombok.TabIndex = 6;
             // 
+            // comboBoxFindCondiditon
+            // 
+            this.comboBoxFindCondiditon.FormattingEnabled = true;
+            this.comboBoxFindCondiditon.Location = new System.Drawing.Point(261, 9);
+            this.comboBoxFindCondiditon.Name = "comboBoxFindCondiditon";
+            this.comboBoxFindCondiditon.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFindCondiditon.TabIndex = 10;
+            // 
+            // comboBoxFindElement
+            // 
+            this.comboBoxFindElement.FormattingEnabled = true;
+            this.comboBoxFindElement.Location = new System.Drawing.Point(134, 9);
+            this.comboBoxFindElement.Name = "comboBoxFindElement";
+            this.comboBoxFindElement.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFindElement.TabIndex = 9;
+            this.comboBoxFindElement.SelectedIndexChanged += new System.EventHandler(this.comboBoxFindElement_SelectedIndexChanged);
+            // 
+            // labelCegKeres
+            // 
+            this.labelCegKeres.AutoSize = true;
+            this.labelCegKeres.Location = new System.Drawing.Point(42, 11);
+            this.labelCegKeres.Name = "labelCegKeres";
+            this.labelCegKeres.Size = new System.Drawing.Size(75, 13);
+            this.labelCegKeres.TabIndex = 6;
+            this.labelCegKeres.Text = "Cég keresése:";
+            // 
+            // textBoxFind
+            // 
+            this.textBoxFind.Location = new System.Drawing.Point(390, 9);
+            this.textBoxFind.Name = "textBoxFind";
+            this.textBoxFind.Size = new System.Drawing.Size(100, 20);
+            this.textBoxFind.TabIndex = 5;
+            this.textBoxFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxFind_KeyDown);
+            // 
             // tableLayoutPanelWorkspace
             // 
             this.tableLayoutPanelWorkspace.ColumnCount = 1;
@@ -296,6 +330,10 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // alapadatokBindingSource
+            // 
+            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
             // 
             // bindingNavigatorCountItem
             // 
@@ -401,7 +439,51 @@
             this.alapadatokDataGridView.Size = new System.Drawing.Size(554, 411);
             this.alapadatokDataGridView.TabIndex = 0;
             this.alapadatokDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellClick);
+            this.alapadatokDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellValueChanged);
             this.alapadatokDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView_DataError);
+            this.alapadatokDataGridView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_RowLeave);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CegID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "CegID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Szamlazas";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Szamlazas";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Felelos";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Felelos";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Cegnev";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Cegnev";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Ceg_forma";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Ceg_forma";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hivatkozas";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Hivatkozas";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "Felfuggesztett";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Felfuggesztett";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // splitContainerJobbOldal
             // 
@@ -447,6 +529,10 @@
             this.ceg_teljes_nevTextBox.Size = new System.Drawing.Size(170, 20);
             this.ceg_teljes_nevTextBox.TabIndex = 1;
             // 
+            // cegadatokBindingSource
+            // 
+            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
+            // 
             // emailTextBox
             // 
             this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.cegadatokBindingSource, "Email", true));
@@ -479,90 +565,6 @@
             this.treeViewDokumentumok.Size = new System.Drawing.Size(244, 307);
             this.treeViewDokumentumok.TabIndex = 0;
             // 
-            // textBoxFind
-            // 
-            this.textBoxFind.Location = new System.Drawing.Point(390, 9);
-            this.textBoxFind.Name = "textBoxFind";
-            this.textBoxFind.Size = new System.Drawing.Size(100, 20);
-            this.textBoxFind.TabIndex = 5;
-            this.textBoxFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxFind_KeyDown);
-            // 
-            // labelCegKeres
-            // 
-            this.labelCegKeres.AutoSize = true;
-            this.labelCegKeres.Location = new System.Drawing.Point(42, 11);
-            this.labelCegKeres.Name = "labelCegKeres";
-            this.labelCegKeres.Size = new System.Drawing.Size(75, 13);
-            this.labelCegKeres.TabIndex = 6;
-            this.labelCegKeres.Text = "Cég keresése:";
-            // 
-            // comboBoxFindElement
-            // 
-            this.comboBoxFindElement.FormattingEnabled = true;
-            this.comboBoxFindElement.Location = new System.Drawing.Point(134, 9);
-            this.comboBoxFindElement.Name = "comboBoxFindElement";
-            this.comboBoxFindElement.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxFindElement.TabIndex = 9;
-            this.comboBoxFindElement.SelectedIndexChanged += new System.EventHandler(this.comboBoxFindElement_SelectedIndexChanged);
-            // 
-            // comboBoxFindCondiditon
-            // 
-            this.comboBoxFindCondiditon.FormattingEnabled = true;
-            this.comboBoxFindCondiditon.Location = new System.Drawing.Point(261, 9);
-            this.comboBoxFindCondiditon.Name = "comboBoxFindCondiditon";
-            this.comboBoxFindCondiditon.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxFindCondiditon.TabIndex = 10;
-            // 
-            // alapadatokBindingSource
-            // 
-            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "CegID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "CegID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Szamlazas";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Szamlazas";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Felelos";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Felelos";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Cegnev";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Cegnev";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Ceg_forma";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Ceg_forma";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hivatkozas";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Hivatkozas";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "Felfuggesztett";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Felfuggesztett";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // cegadatokBindingSource
-            // 
-            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -590,6 +592,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingNavigator)).EndInit();
             this.alapadatokBindingNavigator.ResumeLayout(false);
             this.alapadatokBindingNavigator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokDataGridView)).EndInit();
             this.splitContainerJobbOldal.Panel1.ResumeLayout(false);
             this.splitContainerJobbOldal.Panel2.ResumeLayout(false);
@@ -597,7 +600,6 @@
             this.splitContainerJobbOldal.ResumeLayout(false);
             this.panelCegAdat.ResumeLayout(false);
             this.panelCegAdat.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

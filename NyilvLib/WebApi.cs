@@ -10,6 +10,10 @@ namespace NyilvLib
     {
         public static string HostAddress { get { return "http://localhost:5112"; } }
     }
+    public static class ControllerFormats
+    {
+        //TODO: bepakolni ide a controller format-okat
+    }
     public static class ControllerGetAlapadatById
     {
         public const string ControllerFormat = "api/Alapadatok/{id}";
@@ -37,6 +41,11 @@ namespace NyilvLib
     public static class ControllerFindAlapadat
     {
         public const string ControllerFormat = "api/Alapadatok/find";
+        public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
+    }
+    public static class ControllerUpdateAlapadat
+    {
+        public const string ControllerFormat = "api/Alapadatok/update";
         public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
     }
     public static class ControllerImport

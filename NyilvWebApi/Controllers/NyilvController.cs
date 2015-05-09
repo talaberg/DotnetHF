@@ -88,7 +88,7 @@ namespace Nyilv.Controllers
         // PUT: api/Alapadatok/find
         [HttpPut]
         [Route(ControllerFindAlapadat.ControllerFormat)]
-        public IHttpActionResult Put([FromBody]MyQuery query)
+        public IHttpActionResult PutFind([FromBody]MyQuery query)
         {
             using (var ctx = new ModelNyilv())
             {
@@ -186,6 +186,31 @@ namespace Nyilv.Controllers
             }
         }
 
+        //Modify Alapadatok element
+        [HttpPost]
+        [Route(ControllerUpdateAlapadat.ControllerFormat)]
+        public IHttpActionResult PutAlapadat([FromBody]Alapadatok adat)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                Alapadatok Item2Modify = ctx.Alapadatok
+                        .Where(c => c.CegID == adat.CegID).FirstOrDefault<Alapadatok>();
+                if(Item2Modify == null)
+                {
+                    ctx.Alapadatok.Add(adat);
+                }
+                else
+                {
+                    ctx.Entry(Item2Modify).CurrentValues.SetValues(adat);
+                }
+                ctx.SaveChanges();
+
+                return Ok();
+            }
+
+        }
+
+        //Import XLS file
         [HttpPost]
         [Route(ControllerImport.ControllerFormat)]
         public HttpResponseMessage Post()
