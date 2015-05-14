@@ -18,11 +18,13 @@ namespace NyilvForms
 {
     public partial class MainWindow : Form
     {
-        bool dataGridViewCellChanged;
-        TreeNode currentnode;
-        int currentCegID = 1;
-        enum ImportCaller { Ceg, Dokumentum };
-        int importcommand;
+        bool dataGridViewCellChanged;           //Indicates if a dataGridView cell is modified
+
+        TreeNode currentnode;                   // Current Dokumentumok TreeNode reference
+
+        int currentCegID = 1;                   // Current CegID regerence
+        enum ImportCaller { Ceg, Dokumentum };  // Enum for importcommand
+        int importcommand;                      // Registers, which import mode called the openFileDialog
         public MainWindow()
         {
             InitializeComponent();
@@ -44,8 +46,8 @@ namespace NyilvForms
         // Event functions ----------------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-        //      Main menu  ----------------------------------------------------------------------------------------------------------------------------------------------
+        //      Main menu events ----------------------------------------------------------------------------------------------------------------------------------------
+        // Import Ceg type xls files
         private void cegimportalasaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ofdImport.FileName = "";
@@ -53,6 +55,7 @@ namespace NyilvForms
             ofdImport.ShowDialog();
             
         }
+        // Import Dokumentumok type xls files
         private void dokumentumokImportalasaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ofdImport.FileName = "";
@@ -60,6 +63,7 @@ namespace NyilvForms
             ofdImport.ShowDialog();
             
         }
+        // OpenFileDialog handler event
         private void ofdImport_FileOk(object sender, CancelEventArgs e)
         {
             using (var client = new WebClient())
@@ -76,7 +80,7 @@ namespace NyilvForms
                 }                
             }
         }
-
+        // Implements Aremeles function
         private void aremelesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Aremeles a = new Aremeles();
@@ -87,14 +91,13 @@ namespace NyilvForms
             }
         }
 
-        //      Database  ----------------------------------------------------------------------------------------------------------------------------------------------
+        //      UI events  ----------------------------------------------------------------------------------------------------------------------------------------------
+        // Find button handler
         private void btFind_Click(object sender, EventArgs e)
         {
             RunFindQUery();
-        }
-
-        //      UI event  ----------------------------------------------------------------------------------------------------------------------------------------------
-
+        }       
+        // Load all elements
         private void buttonLoadAll_Click(object sender, EventArgs e)
         {
             List<Alapadatok> ClientList = GetAllAlapadat();
@@ -102,7 +105,25 @@ namespace NyilvForms
             UpdateCegadatok(ClientList.First().CegID);
             UpdateDokumentumok(ClientList.First().CegID);
         }
+        // Find element combobox change event
+        private void comboBoxFindElement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBoxElementItem Item = (ComboBoxElementItem)comboBoxFindElement.SelectedItem;
+            System.TypeCode ItemTypeCode = Type.GetTypeCode(Item.Type);
 
+            ComboBoxFindConditionUpdate(ItemTypeCode);
+
+        }
+        // Find textbox keydown event
+        private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                RunFindQUery();
+            }
+        }
+
+        // Datagridview cell switch event
         private void alapadatokDataGridView_CellSwitch(object sender, EventArgs e)
         {
             int index = alapadatokDataGridView.CurrentCell.RowIndex;
@@ -115,26 +136,12 @@ namespace NyilvForms
             }
         }
 
-        private void comboBoxFindElement_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBoxElementItem Item = (ComboBoxElementItem)comboBoxFindElement.SelectedItem;
-            System.TypeCode ItemTypeCode = Type.GetTypeCode(Item.Type);
-
-            ComboBoxFindConditionUpdate(ItemTypeCode);
-
-        }
-        private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                RunFindQUery();
-            }
-        }
+        // DataGridView Cell value changed
         private void alapadatokDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewCellChanged = true;
         }
-
+        // DataGridView row leave
         private void alapadatokDataGridView_RowLeave(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridViewCellChanged)
@@ -143,17 +150,19 @@ namespace NyilvForms
                 dataGridViewCellChanged = false;
             }
         }
+        // Delete DataGridView element
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
             RemoveAlapadatokElement(currentCegID);
             RemoveCegadatokElement(currentCegID);
         }
+        // Delete Cegadatok field update
         private void buttonCegadatFrissit_Click(object sender, EventArgs e)
         {
-            Cegadatok c = (Cegadatok)cegadatokBindingSource.Current;
-            if (c != null)
+            Cegadatok ceg = (Cegadatok)cegadatokBindingSource.Current;
+            if (ceg != null)
             {
-                UpdateDatabase(c);
+                UpdateDatabase(ceg);
             }
         }
         // Dokumentumok Tree View ------
@@ -173,6 +182,9 @@ namespace NyilvForms
                 }
             }
         }
+
+        //      Toolstrip events --------------------------------------------------------------------------------------------------------------------
+        // Add document
         private void hozzaadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dokumentumok doc = new Dokumentumok{
@@ -189,10 +201,12 @@ namespace NyilvForms
             }
 
         }
+        // Modify document
         private void modositasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DokumentumokModify();
         }
+        // Delete document
         private void eltavolitasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (currentnode.Parent != null)
@@ -206,7 +220,7 @@ namespace NyilvForms
 
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // UI update functions ------------------------------------------------------------------------------------------------------------------------------------------
+        // UI update supplementary functions ----------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         private void UpdateAlapadatokField(List<Alapadatok> ClientList)
         {
