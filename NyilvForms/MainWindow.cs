@@ -21,6 +21,8 @@ namespace NyilvForms
         bool dataGridViewCellChanged;
         TreeNode currentnode;
         int currentCegID = 1;
+        enum ImportCaller { Ceg, Dokumentum };
+        int importcommand;
         public MainWindow()
         {
             InitializeComponent();
@@ -44,9 +46,19 @@ namespace NyilvForms
 
 
         //      Main menu  ----------------------------------------------------------------------------------------------------------------------------------------------
-        private void importalasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void cegimportalasaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ofdImport.FileName = "";
+            importcommand = (int)ImportCaller.Ceg;
             ofdImport.ShowDialog();
+            
+        }
+        private void dokumentumokImportalasaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ofdImport.FileName = "";
+            importcommand = (int)ImportCaller.Dokumentum;
+            ofdImport.ShowDialog();
+            
         }
         private void ofdImport_FileOk(object sender, CancelEventArgs e)
         {
@@ -54,14 +66,17 @@ namespace NyilvForms
             {
 
                 string s = ofdImport.FileName;
-                client.UploadFileAsync(new Uri(ControllerImport.ControllerUrl), ofdImport.FileName.ToString());
-
-                /* resp.EnsureSuccessStatusCode();
-
-                 var adat = resp.Content.ReadAsAsync<Alapadatok>().Result;
-                 alapadatokBindingSource.Add(adat as Alapadatok);*/
+                if (importcommand == (int)ImportCaller.Ceg)
+                {
+                    client.UploadFileAsync(new Uri(ControllerImportCeg.ControllerUrl), ofdImport.FileName.ToString());
+                }
+                else if (importcommand == (int)ImportCaller.Dokumentum)
+                {
+                    client.UploadFileAsync(new Uri(ControllerImportDokumentum.ControllerUrl), ofdImport.FileName.ToString());
+                }                
             }
         }
+
         private void aremelesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Aremeles a = new Aremeles();
@@ -193,11 +208,6 @@ namespace NyilvForms
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // UI update functions ------------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        private void UpdateAlapadatokField(Alapadatok adat)
-        {
-            alapadatokBindingSource.Clear();
-            alapadatokBindingSource.Add(adat as Alapadatok);
-        }
         private void UpdateAlapadatokField(List<Alapadatok> ClientList)
         {
             alapadatokBindingSource.Clear();
@@ -412,7 +422,6 @@ namespace NyilvForms
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(new Uri(ControllerDeleteAlapadatById.ControllerUrl(id))).Result;
-                resp.EnsureSuccessStatusCode();
             }
         }
         void RemoveCegadatokElement(int id)
@@ -420,7 +429,6 @@ namespace NyilvForms
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(new Uri(ControllerDeleteCegadatokById.ControllerUrl(id))).Result;
-                resp.EnsureSuccessStatusCode();
             }
         }
         void RemoveDokumentumokElement(int id)
@@ -428,7 +436,6 @@ namespace NyilvForms
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(new Uri(ControllerDeleteDokumentumokById.ControllerUrl(id))).Result;
-                resp.EnsureSuccessStatusCode();
             }
         }
         void DokumentumokModify()
@@ -470,13 +477,12 @@ namespace NyilvForms
                 var resp = client.PostAsJsonAsync(ControllerAremeles.ControllerUrl, p).Result;
                 resp.EnsureSuccessStatusCode();
 
-                if (alapadatokDataGridView.CurrentCell.RowIndex != null)
+                if (alapadatokDataGridView.CurrentCell != null)
                 {
                     UpdateCegadatok(currentCegID);
                 }
             }
         }
-
 
     }
 }

@@ -82,9 +82,14 @@ namespace NyilvLib
         public const string ControllerFormat = "api/aremeles";
         public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
     }
-    public static class ControllerImport
+    public static class ControllerImportCeg
     {
-        public const string ControllerFormat = "api/import";
+        public const string ControllerFormat = "api/importCeg";
+        public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
+    }
+    public static class ControllerImportDokumentum
+    {
+        public const string ControllerFormat = "api/importDokumentum";
         public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
     }
 }

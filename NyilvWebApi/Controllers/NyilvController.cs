@@ -337,10 +337,10 @@ namespace Nyilv.Controllers
             }
         }
 
-        //Import XLS file
+        //Import Ceg XLS file
         [HttpPost]
-        [Route(ControllerImport.ControllerFormat)]
-        public HttpResponseMessage Post()
+        [Route(ControllerImportCeg.ControllerFormat)]
+        public HttpResponseMessage PostImportCeg()
         {
             HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
@@ -355,31 +355,96 @@ namespace Nyilv.Controllers
                     postedFile.SaveAs(filePath);
                     docfiles.Add(filePath);
                 }
-                MyXlsImporter.ImportAlapadatok(docfiles);
+                MyXlsImporter.ImportCeg(docfiles);
+
+                List<Alapadatok> importedItems = MyXlsImporter.ImportAlapadatokResult;
+                List<Cegadatok> importedCegadatokItems = MyXlsImporter.ImportCegadatokResult;
+
+                using (var ctx = new ModelNyilv())
+                {
+                    foreach (Alapadatok item in importedItems)
+                    {
+                        Alapadatok Item2Modify = ctx.Alapadatok
+                                .Where(c => c.CegID == item.CegID).FirstOrDefault<Alapadatok>();
+                        if (Item2Modify == null)
+                        {
+                            ctx.Alapadatok.Add(item);
+                        }
+                        else
+                        {
+                           // ctx.Entry(Item2Modify).CurrentValues.SetValues(item);
+                        }                        
+                    }
+                    foreach (Cegadatok item in importedCegadatokItems)
+                    {
+                        Cegadatok Item2Modify = ctx.Cegadatok
+                                .Where(c => c.CegID == item.CegID).FirstOrDefault<Cegadatok>();
+                        if (Item2Modify == null)
+                        {
+                            ctx.Cegadatok.Add(item);
+                        }
+                        else
+                        {
+                            // ctx.Entry(Item2Modify).CurrentValues.SetValues(item);
+                        }
+                    }
+                    ctx.SaveChanges();
+                }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
             }
             else
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-
             return result;
-
         }
-
-        // POST api/nyilv
-        public void Post([FromBody]string value)
+        //Import Dokumentum XLS file
+        [HttpPost]
+        [Route(ControllerImportDokumentum.ControllerFormat)]
+        public HttpResponseMessage PostImportDokumentum()
         {
-        }
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                int i = 0;
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("~/" + file + (i++).ToString() + ".xlsx");
+                    postedFile.SaveAs(filePath);
+                    docfiles.Add(filePath);
+                }
+                MyXlsImporter.ImportDokumentum(docfiles);
 
-        // PUT api/nyilv/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+                List<Dokumentumok> importedItems = MyXlsImporter.ImportDokumentumokResult;
 
-        // DELETE api/nyilv/5
-        public void Delete(int id)
-        {
+                using (var ctx = new ModelNyilv())
+                {
+                    foreach (Dokumentumok item in importedItems)
+                    {
+                        Dokumentumok Item2Modify = ctx.Dokumentumok
+                                .Where(c => c.DokumentumID == item.DokumentumID).FirstOrDefault<Dokumentumok>();
+                        if (Item2Modify == null)
+                        {
+                            ctx.Dokumentumok.Add(item);
+                        }
+                        else
+                        {
+                            // ctx.Entry(Item2Modify).CurrentValues.SetValues(item);
+                        }
+                    }
+
+                    ctx.SaveChanges();
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            return result;
         }
     }
 }
