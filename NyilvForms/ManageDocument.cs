@@ -27,10 +27,13 @@ namespace NyilvForms
         public ManageDocument()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterParent;
         }
         public ManageDocument(Dokumentumok doc)
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterParent;
+
             datumDateTimePicker.Value = doc.Datum == null ? DateTime.Now : (DateTime)doc.Datum;
             dokumentum_tipusTextBox.Text = doc.Dokumentum_tipus == null ? "" : doc.Dokumentum_tipus;
             megjegyzesTextBox.Text = doc.Megjegyzes == null ? "" : doc.Megjegyzes;

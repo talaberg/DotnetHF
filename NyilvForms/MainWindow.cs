@@ -62,6 +62,15 @@ namespace NyilvForms
                  alapadatokBindingSource.Add(adat as Alapadatok);*/
             }
         }
+        private void aremelesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Aremeles a = new Aremeles();
+            a.ShowDialog();
+            if (a.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                Aremeles(a.Emeles);                
+            }
+        }
 
         //      Database  ----------------------------------------------------------------------------------------------------------------------------------------------
         private void btFind_Click(object sender, EventArgs e)
@@ -454,22 +463,19 @@ namespace NyilvForms
 
         }
 
+        private void Aremeles(double p)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = client.PostAsJsonAsync(ControllerAremeles.ControllerUrl, p).Result;
+                resp.EnsureSuccessStatusCode();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                if (alapadatokDataGridView.CurrentCell.RowIndex != null)
+                {
+                    UpdateCegadatok(currentCegID);
+                }
+            }
+        }
 
 
     }

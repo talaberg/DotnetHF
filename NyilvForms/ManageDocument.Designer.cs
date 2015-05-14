@@ -33,11 +33,11 @@
             System.Windows.Forms.Label dokumentum_tipusLabel;
             System.Windows.Forms.Label megjegyzesLabel;
             this.datumDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.dokumentumokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dokumentum_tipusTextBox = new System.Windows.Forms.TextBox();
             this.megjegyzesTextBox = new System.Windows.Forms.TextBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.dokumentumokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             datumLabel = new System.Windows.Forms.Label();
             dokumentum_tipusLabel = new System.Windows.Forms.Label();
             megjegyzesLabel = new System.Windows.Forms.Label();
@@ -79,10 +79,6 @@
             this.datumDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.datumDateTimePicker.TabIndex = 2;
             // 
-            // dokumentumokBindingSource
-            // 
-            this.dokumentumokBindingSource.DataSource = typeof(NyilvLib.Entities.Dokumentumok);
-            // 
             // dokumentum_tipusTextBox
             // 
             this.dokumentum_tipusTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dokumentumokBindingSource, "Dokumentum_tipus", true));
@@ -119,6 +115,10 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // dokumentumokBindingSource
+            // 
+            this.dokumentumokBindingSource.DataSource = typeof(NyilvLib.Entities.Dokumentumok);
+            // 
             // ManageDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,6 +132,8 @@
             this.Controls.Add(this.dokumentum_tipusTextBox);
             this.Controls.Add(megjegyzesLabel);
             this.Controls.Add(this.megjegyzesTextBox);
+            this.MaximumSize = new System.Drawing.Size(440, 184);
+            this.MinimumSize = new System.Drawing.Size(440, 184);
             this.Name = "ManageDocument";
             this.Text = "ManageDocument";
             ((System.ComponentModel.ISupportInitialize)(this.dokumentumokBindingSource)).EndInit();

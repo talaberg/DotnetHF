@@ -77,6 +77,11 @@ namespace NyilvLib
         public static string ControllerUrl(int id) { return (WebApi.HostAddress + "/api/Dokumentumok/delete/" + id.ToString()); }
     }
 
+    public static class ControllerAremeles
+    {
+        public const string ControllerFormat = "api/aremeles";
+        public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
+    }
     public static class ControllerImport
     {
         public const string ControllerFormat = "api/import";

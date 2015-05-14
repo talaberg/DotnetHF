@@ -71,6 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aremeles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Aremeles.Designer.cs">
+      <DependentUpon>Aremeles.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComboBoxConditionItem.cs" />
     <Compile Include="ComboBoxElementItem.cs" />
     <Compile Include="MainWindow.cs">
@@ -87,6 +93,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Aremeles.resx">
+      <DependentUpon>Aremeles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

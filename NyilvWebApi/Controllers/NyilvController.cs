@@ -318,6 +318,25 @@ namespace Nyilv.Controllers
             }
         }
 
+        // api/aremeles/{ar}
+        [HttpPost]
+        [Route(ControllerAremeles.ControllerFormat)]
+        public IHttpActionResult Aremeles([FromBody]double ar)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                foreach (var ceg in ctx.Cegadatok)
+                {
+                    if (ceg.Tarifa != null)
+                    {
+                        ceg.Tarifa = (int)((double)ceg.Tarifa * ar); 
+                    }                                       
+                }
+                ctx.SaveChanges();
+                return Ok();
+            }
+        }
+
         //Import XLS file
         [HttpPost]
         [Route(ControllerImport.ControllerFormat)]

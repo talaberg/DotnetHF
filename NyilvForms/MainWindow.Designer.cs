@@ -51,7 +51,6 @@
             this.splitContainerBalOldal = new System.Windows.Forms.SplitContainer();
             this.alapadatokBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.alapadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -64,18 +63,10 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.alapadatokBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.alapadatokDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerJobbOldal = new System.Windows.Forms.SplitContainer();
             this.panelCegAdat = new System.Windows.Forms.Panel();
             this.buttonCegadatFrissit = new System.Windows.Forms.Button();
             this.tarifaTextBox = new System.Windows.Forms.TextBox();
-            this.cegadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ceg_teljes_nevTextBox = new System.Windows.Forms.TextBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.telefonTextBox = new System.Windows.Forms.TextBox();
@@ -85,6 +76,17 @@
             this.hozzáadásToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modositasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eltavolitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eszközökToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aremelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alapadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cegadatokBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -103,15 +105,15 @@
             this.splitContainerBalOldal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingNavigator)).BeginInit();
             this.alapadatokBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerJobbOldal)).BeginInit();
             this.splitContainerJobbOldal.Panel1.SuspendLayout();
             this.splitContainerJobbOldal.Panel2.SuspendLayout();
             this.splitContainerJobbOldal.SuspendLayout();
             this.panelCegAdat.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).BeginInit();
             this.contextMenuDokumentumokNode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ceg_teljes_nevLabel
@@ -172,7 +174,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fajlToolStripMenuItem});
+            this.fajlToolStripMenuItem,
+            this.eszközökToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(995, 24);
@@ -349,10 +352,6 @@
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
-            // alapadatokBindingSource
-            // 
-            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
-            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
@@ -466,48 +465,6 @@
             this.alapadatokDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView_DataError);
             this.alapadatokDataGridView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_RowLeave);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "CegID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "CegID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Szamlazas";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Szamlazas";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Felelos";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Felelos";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Cegnev";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Cegnev";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Ceg_forma";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Ceg_forma";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hivatkozas";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Hivatkozas";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "Felfuggesztett";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Felfuggesztett";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
             // splitContainerJobbOldal
             // 
             this.splitContainerJobbOldal.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -567,10 +524,6 @@
             this.tarifaTextBox.Name = "tarifaTextBox";
             this.tarifaTextBox.Size = new System.Drawing.Size(170, 20);
             this.tarifaTextBox.TabIndex = 9;
-            // 
-            // cegadatokBindingSource
-            // 
-            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
             // 
             // ceg_teljes_nevTextBox
             // 
@@ -643,6 +596,71 @@
             this.eltavolitasToolStripMenuItem.Text = "Eltávolítás";
             this.eltavolitasToolStripMenuItem.Click += new System.EventHandler(this.eltavolitasToolStripMenuItem_Click);
             // 
+            // eszközökToolStripMenuItem
+            // 
+            this.eszközökToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aremelesToolStripMenuItem});
+            this.eszközökToolStripMenuItem.Name = "eszközökToolStripMenuItem";
+            this.eszközökToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.eszközökToolStripMenuItem.Text = "Eszközök";
+            // 
+            // aremelesToolStripMenuItem
+            // 
+            this.aremelesToolStripMenuItem.Name = "aremelesToolStripMenuItem";
+            this.aremelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aremelesToolStripMenuItem.Text = "Áremelés...";
+            this.aremelesToolStripMenuItem.Click += new System.EventHandler(this.aremelesToolStripMenuItem_Click);
+            // 
+            // alapadatokBindingSource
+            // 
+            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CegID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "CegID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Szamlazas";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Szamlazas";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Felelos";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Felelos";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Cegnev";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Cegnev";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Ceg_forma";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Ceg_forma";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hivatkozas";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Hivatkozas";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "Felfuggesztett";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Felfuggesztett";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // cegadatokBindingSource
+            // 
+            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -672,7 +690,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingNavigator)).EndInit();
             this.alapadatokBindingNavigator.ResumeLayout(false);
             this.alapadatokBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alapadatokDataGridView)).EndInit();
             this.splitContainerJobbOldal.Panel1.ResumeLayout(false);
             this.splitContainerJobbOldal.Panel2.ResumeLayout(false);
@@ -680,8 +697,9 @@
             this.splitContainerJobbOldal.ResumeLayout(false);
             this.panelCegAdat.ResumeLayout(false);
             this.panelCegAdat.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).EndInit();
             this.contextMenuDokumentumokNode.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.alapadatokBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cegadatokBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -739,6 +757,8 @@
         private System.Windows.Forms.ToolStripMenuItem eltavolitasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hozzáadásToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem modositasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eszközökToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aremelesToolStripMenuItem;
     }
 }
 
