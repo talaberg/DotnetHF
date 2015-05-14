@@ -88,6 +88,7 @@
             this.hozzáadásToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modositasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eltavolitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kilepesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -187,7 +188,8 @@
             // 
             this.fajlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importalasToolStripMenuItem,
-            this.dokumentumokImportalasaToolStripMenuItem});
+            this.dokumentumokImportalasaToolStripMenuItem,
+            this.kilepesToolStripMenuItem});
             this.fajlToolStripMenuItem.Name = "fajlToolStripMenuItem";
             this.fajlToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
             this.fajlToolStripMenuItem.Text = "Fájl";
@@ -670,6 +672,13 @@
             this.eltavolitasToolStripMenuItem.Text = "Eltávolítás";
             this.eltavolitasToolStripMenuItem.Click += new System.EventHandler(this.eltavolitasToolStripMenuItem_Click);
             // 
+            // kilepesToolStripMenuItem
+            // 
+            this.kilepesToolStripMenuItem.Name = "kilepesToolStripMenuItem";
+            this.kilepesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.kilepesToolStripMenuItem.Text = "Kilépés";
+            this.kilepesToolStripMenuItem.Click += new System.EventHandler(this.kilepesToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -769,6 +778,7 @@
         private System.Windows.Forms.ToolStripMenuItem eszközökToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aremelesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dokumentumokImportalasaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kilepesToolStripMenuItem;
     }
 }
 
