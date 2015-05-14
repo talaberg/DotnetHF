@@ -40,6 +40,7 @@
             this.fajlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importalasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dokumentumokImportalasaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kilepesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eszközökToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aremelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdImport = new System.Windows.Forms.OpenFileDialog();
@@ -88,7 +89,6 @@
             this.hozzáadásToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modositasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eltavolitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kilepesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -207,6 +207,13 @@
             this.dokumentumokImportalasaToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.dokumentumokImportalasaToolStripMenuItem.Text = "Dokumentumok Importálása...";
             this.dokumentumokImportalasaToolStripMenuItem.Click += new System.EventHandler(this.dokumentumokImportalasaToolStripMenuItem_Click);
+            // 
+            // kilepesToolStripMenuItem
+            // 
+            this.kilepesToolStripMenuItem.Name = "kilepesToolStripMenuItem";
+            this.kilepesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.kilepesToolStripMenuItem.Text = "Kilépés";
+            this.kilepesToolStripMenuItem.Click += new System.EventHandler(this.kilepesToolStripMenuItem_Click);
             // 
             // eszközökToolStripMenuItem
             // 
@@ -493,7 +500,7 @@
             this.alapadatokDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellSwitch);
             this.alapadatokDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellValueChanged);
             this.alapadatokDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView_DataError);
-            this.alapadatokDataGridView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_RowLeave);
+            this.alapadatokDataGridView.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_RowLeave);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -671,13 +678,6 @@
             this.eltavolitasToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.eltavolitasToolStripMenuItem.Text = "Eltávolítás";
             this.eltavolitasToolStripMenuItem.Click += new System.EventHandler(this.eltavolitasToolStripMenuItem_Click);
-            // 
-            // kilepesToolStripMenuItem
-            // 
-            this.kilepesToolStripMenuItem.Name = "kilepesToolStripMenuItem";
-            this.kilepesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-            this.kilepesToolStripMenuItem.Text = "Kilépés";
-            this.kilepesToolStripMenuItem.Click += new System.EventHandler(this.kilepesToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
