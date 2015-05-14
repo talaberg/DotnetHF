@@ -175,7 +175,7 @@
             this.fajlToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(808, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(995, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -201,7 +201,7 @@
             // 
             // buttonLoadAll
             // 
-            this.buttonLoadAll.Location = new System.Drawing.Point(709, 3);
+            this.buttonLoadAll.Location = new System.Drawing.Point(590, 6);
             this.buttonLoadAll.Name = "buttonLoadAll";
             this.buttonLoadAll.Size = new System.Drawing.Size(84, 23);
             this.buttonLoadAll.TabIndex = 4;
@@ -220,7 +220,7 @@
             this.panelGombok.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelGombok.Location = new System.Drawing.Point(3, 3);
             this.panelGombok.Name = "panelGombok";
-            this.panelGombok.Size = new System.Drawing.Size(802, 55);
+            this.panelGombok.Size = new System.Drawing.Size(989, 34);
             this.panelGombok.TabIndex = 6;
             // 
             // comboBoxFindCondiditon
@@ -260,24 +260,23 @@
             // tableLayoutPanelWorkspace
             // 
             this.tableLayoutPanelWorkspace.ColumnCount = 1;
-            this.tableLayoutPanelWorkspace.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelWorkspace.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelWorkspace.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelWorkspace.Controls.Add(this.panelGombok, 0, 0);
             this.tableLayoutPanelWorkspace.Controls.Add(this.splitContainerAdatok, 0, 1);
             this.tableLayoutPanelWorkspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelWorkspace.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanelWorkspace.Name = "tableLayoutPanelWorkspace";
             this.tableLayoutPanelWorkspace.RowCount = 2;
-            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.89084F));
-            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.10916F));
-            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 447F));
-            this.tableLayoutPanelWorkspace.Size = new System.Drawing.Size(808, 513);
+            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanelWorkspace.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelWorkspace.Size = new System.Drawing.Size(995, 513);
             this.tableLayoutPanelWorkspace.TabIndex = 7;
             // 
             // splitContainerAdatok
             // 
             this.splitContainerAdatok.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerAdatok.Location = new System.Drawing.Point(3, 64);
+            this.splitContainerAdatok.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainerAdatok.Location = new System.Drawing.Point(3, 43);
             this.splitContainerAdatok.Name = "splitContainerAdatok";
             // 
             // splitContainerAdatok.Panel1
@@ -287,13 +286,14 @@
             // splitContainerAdatok.Panel2
             // 
             this.splitContainerAdatok.Panel2.Controls.Add(this.splitContainerJobbOldal);
-            this.splitContainerAdatok.Size = new System.Drawing.Size(802, 446);
-            this.splitContainerAdatok.SplitterDistance = 554;
+            this.splitContainerAdatok.Size = new System.Drawing.Size(989, 467);
+            this.splitContainerAdatok.SplitterDistance = 741;
             this.splitContainerAdatok.TabIndex = 7;
             // 
             // splitContainerBalOldal
             // 
             this.splitContainerBalOldal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerBalOldal.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerBalOldal.Location = new System.Drawing.Point(0, 0);
             this.splitContainerBalOldal.Name = "splitContainerBalOldal";
             this.splitContainerBalOldal.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -306,8 +306,8 @@
             // 
             this.splitContainerBalOldal.Panel2.AutoScroll = true;
             this.splitContainerBalOldal.Panel2.Controls.Add(this.alapadatokDataGridView);
-            this.splitContainerBalOldal.Size = new System.Drawing.Size(554, 446);
-            this.splitContainerBalOldal.SplitterDistance = 31;
+            this.splitContainerBalOldal.Size = new System.Drawing.Size(741, 467);
+            this.splitContainerBalOldal.SplitterDistance = 32;
             this.splitContainerBalOldal.TabIndex = 8;
             // 
             // alapadatokBindingNavigator
@@ -336,7 +336,7 @@
             this.alapadatokBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.alapadatokBindingNavigator.Name = "alapadatokBindingNavigator";
             this.alapadatokBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.alapadatokBindingNavigator.Size = new System.Drawing.Size(554, 25);
+            this.alapadatokBindingNavigator.Size = new System.Drawing.Size(741, 25);
             this.alapadatokBindingNavigator.TabIndex = 1;
             this.alapadatokBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -459,7 +459,7 @@
             this.alapadatokDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.alapadatokDataGridView.Location = new System.Drawing.Point(0, 0);
             this.alapadatokDataGridView.Name = "alapadatokDataGridView";
-            this.alapadatokDataGridView.Size = new System.Drawing.Size(554, 411);
+            this.alapadatokDataGridView.Size = new System.Drawing.Size(741, 431);
             this.alapadatokDataGridView.TabIndex = 0;
             this.alapadatokDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellSwitch);
             this.alapadatokDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.alapadatokDataGridView_CellValueChanged);
@@ -511,6 +511,7 @@
             // splitContainerJobbOldal
             // 
             this.splitContainerJobbOldal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerJobbOldal.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerJobbOldal.Location = new System.Drawing.Point(0, 0);
             this.splitContainerJobbOldal.Name = "splitContainerJobbOldal";
             this.splitContainerJobbOldal.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -518,11 +519,12 @@
             // splitContainerJobbOldal.Panel1
             // 
             this.splitContainerJobbOldal.Panel1.Controls.Add(this.panelCegAdat);
+            this.splitContainerJobbOldal.Panel1MinSize = 177;
             // 
             // splitContainerJobbOldal.Panel2
             // 
             this.splitContainerJobbOldal.Panel2.Controls.Add(this.treeViewDokumentumok);
-            this.splitContainerJobbOldal.Size = new System.Drawing.Size(244, 446);
+            this.splitContainerJobbOldal.Size = new System.Drawing.Size(244, 467);
             this.splitContainerJobbOldal.SplitterDistance = 177;
             this.splitContainerJobbOldal.TabIndex = 0;
             // 
@@ -607,7 +609,7 @@
             this.treeViewDokumentumok.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDokumentumok.Location = new System.Drawing.Point(0, 0);
             this.treeViewDokumentumok.Name = "treeViewDokumentumok";
-            this.treeViewDokumentumok.Size = new System.Drawing.Size(244, 265);
+            this.treeViewDokumentumok.Size = new System.Drawing.Size(244, 286);
             this.treeViewDokumentumok.TabIndex = 0;
             this.treeViewDokumentumok.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDokumentumok_MouseClick);
             // 
@@ -645,12 +647,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 537);
+            this.ClientSize = new System.Drawing.Size(995, 537);
             this.Controls.Add(this.tableLayoutPanelWorkspace);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(700, 300);
             this.Name = "MainWindow";
-            this.Text = "MainWindow";
+            this.Text = "Ügyfélnyilvántartás";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelGombok.ResumeLayout(false);
