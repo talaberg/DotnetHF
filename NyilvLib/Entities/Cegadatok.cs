@@ -22,5 +22,7 @@ namespace NyilvLib.Entities
 
         [StringLength(50)]
         public string Telefon { get; set; }
+
+        public int? Tarifa { get; set; }
     }
 }

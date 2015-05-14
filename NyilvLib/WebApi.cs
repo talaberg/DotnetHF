@@ -8,7 +8,7 @@ namespace NyilvLib
 {
     public static class WebApi
     {
-        public static string HostAddress { get { return "http://localhost:5112"; } }
+        public static string HostAddress { get { return "http://localhost.fiddler:5112"/*"http://localhost:5112"*/; } }
     }
     public static class ControllerFormats
     {
@@ -48,6 +48,35 @@ namespace NyilvLib
         public const string ControllerFormat = "api/Alapadatok/update";
         public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
     }
+    public static class ControllerUpdateCegadatok
+    {
+        public const string ControllerFormat = "api/Cegadatok/update";
+        public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
+    }
+    public static class ControllerUpdateDokumentumok
+    {
+        public const string ControllerFormat = "api/Dokumentumok/update";
+        public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
+    }
+    public static class ControllerDeleteAlapadatById
+    {
+        public const string ControllerFormat = "api/Alapadatok/delete/{id}";
+        public const string ControllerName = "GetDeleteAlapadatokById";
+        public static string ControllerUrl(int id) { return (WebApi.HostAddress + "/api/Alapadatok/delete/" + id.ToString()); }
+    }
+    public static class ControllerDeleteCegadatokById
+    {
+        public const string ControllerFormat = "api/Cegadatok/delete/{id}";
+        public const string ControllerName = "GetDeleteCegadatokById";
+        public static string ControllerUrl(int id) { return (WebApi.HostAddress + "/api/Cegadatok/delete/" + id.ToString()); }
+    }
+    public static class ControllerDeleteDokumentumokById
+    {
+        public const string ControllerFormat = "api/Dokumentumok/delete/{id}";
+        public const string ControllerName = "GetDeleteDokumentumokById";
+        public static string ControllerUrl(int id) { return (WebApi.HostAddress + "/api/Dokumentumok/delete/" + id.ToString()); }
+    }
+
     public static class ControllerImport
     {
         public const string ControllerFormat = "api/import";

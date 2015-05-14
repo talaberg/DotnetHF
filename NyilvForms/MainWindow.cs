@@ -19,6 +19,8 @@ namespace NyilvForms
     public partial class MainWindow : Form
     {
         bool dataGridViewCellChanged;
+        TreeNode currentnode;
+        int currentCegID = 1;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +37,6 @@ namespace NyilvForms
             comboBoxFindCondiditon.ValueMember = "Name";
 
             dataGridViewCellChanged = false;
-
         }
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Event functions ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,8 +52,9 @@ namespace NyilvForms
         {
             using (var client = new WebClient())
             {
+
                 string s = ofdImport.FileName;
-                client.UploadFileAsync(new Uri(ControllerImport.ControllerFormat), ofdImport.FileName.ToString());
+                client.UploadFileAsync(new Uri(ControllerImport.ControllerUrl), ofdImport.FileName.ToString());
 
                 /* resp.EnsureSuccessStatusCode();
 
@@ -73,13 +75,20 @@ namespace NyilvForms
         {
             List<Alapadatok> ClientList = GetAllAlapadat();
             UpdateAlapadatokField(ClientList);
-            UpdateCegadatokAndDokumentumok(ClientList.First().CegID);
+            UpdateCegadatok(ClientList.First().CegID);
+            UpdateDokumentumok(ClientList.First().CegID);
         }
 
-        private void alapadatokDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void alapadatokDataGridView_CellSwitch(object sender, EventArgs e)
         {
-            int ID = (int)alapadatokDataGridView.Rows[e.RowIndex].Cells[0].Value;
-            UpdateCegadatokAndDokumentumok(ID);
+            int index = alapadatokDataGridView.CurrentCell.RowIndex;
+            if (index >= 0)
+            {
+                int ID = (int)alapadatokDataGridView.Rows[index].Cells[0].Value;
+                currentCegID = ID;
+                UpdateCegadatok(ID);
+                UpdateDokumentumok(ID);
+            }
         }
 
         private void comboBoxFindElement_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,10 +115,71 @@ namespace NyilvForms
         {
             if (dataGridViewCellChanged)
             {
-                UpdateAlapadatokDatabase((Alapadatok)alapadatokDataGridView.Rows[e.RowIndex].DataBoundItem);
+                UpdateDatabase((Alapadatok)alapadatokDataGridView.Rows[e.RowIndex].DataBoundItem);
                 dataGridViewCellChanged = false;
             }
         }
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            RemoveAlapadatokElement(currentCegID);
+            RemoveCegadatokElement(currentCegID);
+        }
+        private void buttonCegadatFrissit_Click(object sender, EventArgs e)
+        {
+            Cegadatok c = (Cegadatok)cegadatokBindingSource.Current;
+            if (c != null)
+            {
+                UpdateDatabase(c);
+            }
+        }
+        // Dokumentumok Tree View ------
+        private void treeViewDokumentumok_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                Point p = new Point(e.X, e.Y);
+
+                // Get the node that the user has clicked.
+                TreeNode node = treeViewDokumentumok.GetNodeAt(p);
+                if (node != null)
+                {
+                    currentnode = node;
+                    contextMenuDokumentumokNode.Show(Control.MousePosition);
+                    treeViewDokumentumok.SelectedNode = node;
+                }
+            }
+        }
+        private void hozzaadasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dokumentumok doc = new Dokumentumok{
+                CegID = currentCegID,
+                 Dokumentum_tipus = currentnode.Parent != null ? currentnode.Parent.Text : currentnode.Text,
+            };
+
+            ManageDocument m = new ManageDocument(doc);
+            m.ShowDialog();
+            if (m.DialogResult == DialogResult.OK)
+            {
+                UpdateDatabase(m.Document);
+                UpdateDokumentumok(currentCegID);
+            }
+
+        }
+        private void modositasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DokumentumokModify();
+        }
+        private void eltavolitasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentnode.Parent != null)
+	        {
+		        RemoveDokumentumokElement((int)currentnode.Tag);
+                UpdateDokumentumok(currentCegID);
+	        }
+            
+        }
+        //-----------------------------
+
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // UI update functions ------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,25 +206,32 @@ namespace NyilvForms
         private void UpdateDokumentumokField(List<Dokumentumok> documents)
         {
             treeViewDokumentumok.Nodes.Clear();
-
-            foreach (Dokumentumok doc in documents)
-            {                
-                TreeNode t;
-                if (treeViewDokumentumok.Nodes.ContainsKey(doc.Dokumentum_tipus))
+            documents.OrderBy(c => c.Dokumentum_tipus);
+            if (documents.Count != 0)
+            {
+                foreach (Dokumentumok doc in documents)
                 {
-                    t = treeViewDokumentumok.Nodes.Find(doc.Dokumentum_tipus, false)[0];                    
-                }
-                else
-                {
-                    t = new TreeNode(doc.Dokumentum_tipus) { Name = doc.Dokumentum_tipus};
-                    treeViewDokumentumok.Nodes.Add(t);
-                }
+                    TreeNode t;
+                    if (treeViewDokumentumok.Nodes.ContainsKey(doc.Dokumentum_tipus))
+                    {
+                        t = treeViewDokumentumok.Nodes.Find(doc.Dokumentum_tipus, false)[0];
+                    }
+                    else
+                    {
+                        t = new TreeNode(doc.Dokumentum_tipus) { Name = doc.Dokumentum_tipus };
+                        treeViewDokumentumok.Nodes.Add(t);
+                    }
 
-                t.Nodes.Add(new TreeNode(doc.Datum.ToString()) { ToolTipText = doc.Megjegyzes });
+                    t.Nodes.Add(new TreeNode(doc.Datum.ToString()) { ToolTipText = doc.Megjegyzes, Tag = doc.DokumentumID });
+                }
+            }
+            else
+            { 
+                treeViewDokumentumok.Nodes.Add(new TreeNode("<Nincs megjelenítendő dokumentum>"));
             }
 
         }
-        void UpdateCegadatokAndDokumentumok(int ID)
+        void UpdateCegadatok(int ID)
         {
             using (var client = new HttpClient())
             {
@@ -162,12 +239,16 @@ namespace NyilvForms
 
                 var adat = resp.Content.ReadAsAsync<Cegadatok>().Result;
 
+                if (adat == null) adat = new Cegadatok { CegID = ID };
                 UpdateCegadatokField(adat);
             }
+        }
+        void UpdateDokumentumok(int ID)
+        {
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(ControllerGetDokumentumokById.ControllerUrl(ID)).Result;
-  
+
                 var adat = resp.Content.ReadAsAsync<List<Dokumentumok>>().Result;
 
                 UpdateDokumentumokField(adat);
@@ -210,7 +291,8 @@ namespace NyilvForms
                     if(adat.Count != 0) 
                     {
                         UpdateAlapadatokField(adat);
-                        UpdateCegadatokAndDokumentumok(adat.First().CegID);                        
+                        UpdateCegadatok(adat.First().CegID);
+                        UpdateDokumentumok(adat.First().CegID); 
                     }
                     else
                     {
@@ -290,15 +372,98 @@ namespace NyilvForms
             }
         }
 
-        void UpdateAlapadatokDatabase(Alapadatok data)
+        void UpdateDatabase(Alapadatok data)
         {
             using (var client = new HttpClient())
             {
                 var resp = client.PostAsJsonAsync(ControllerUpdateAlapadat.ControllerUrl, data).Result;
                 resp.EnsureSuccessStatusCode();
-            }
- 
+            } 
         }
+
+        void UpdateDatabase(Cegadatok data)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = client.PostAsJsonAsync(ControllerUpdateCegadatok.ControllerUrl, data).Result;
+                resp.EnsureSuccessStatusCode();
+            }
+        }
+        void UpdateDatabase(Dokumentumok data)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = client.PostAsJsonAsync(ControllerUpdateDokumentumok.ControllerUrl, data).Result;
+                resp.EnsureSuccessStatusCode();
+            }
+        }
+
+        void RemoveAlapadatokElement(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = client.GetAsync(new Uri(ControllerDeleteAlapadatById.ControllerUrl(id))).Result;
+                resp.EnsureSuccessStatusCode();
+            }
+        }
+        void RemoveCegadatokElement(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = client.GetAsync(new Uri(ControllerDeleteCegadatokById.ControllerUrl(id))).Result;
+                resp.EnsureSuccessStatusCode();
+            }
+        }
+        void RemoveDokumentumokElement(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                var resp = client.GetAsync(new Uri(ControllerDeleteDokumentumokById.ControllerUrl(id))).Result;
+                resp.EnsureSuccessStatusCode();
+            }
+        }
+        void DokumentumokModify()
+        {
+            Dokumentumok doc;
+            if (currentnode.Parent != null) // child clicked
+            {
+                doc = new Dokumentumok
+                {
+                    DokumentumID = (int)currentnode.Tag,
+                    CegID = currentCegID,
+                    Dokumentum_tipus = currentnode.Parent.Text,
+                    Megjegyzes = currentnode.ToolTipText,
+                    Datum = DateTime.Parse(currentnode.Text)
+                };
+            }
+            else //category clicked
+            {
+                doc = new Dokumentumok
+                {
+                    CegID = currentCegID,
+                    Dokumentum_tipus = currentnode.Text
+                };
+            }
+            ManageDocument m = new ManageDocument(doc);
+            m.ShowDialog();
+            if (m.DialogResult == DialogResult.OK)
+            {
+                UpdateDatabase(m.Document);
+                UpdateDokumentumok(currentCegID);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

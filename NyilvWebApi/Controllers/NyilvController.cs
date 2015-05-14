@@ -189,7 +189,7 @@ namespace Nyilv.Controllers
         //Modify Alapadatok element
         [HttpPost]
         [Route(ControllerUpdateAlapadat.ControllerFormat)]
-        public IHttpActionResult PutAlapadat([FromBody]Alapadatok adat)
+        public IHttpActionResult PostAlapadat([FromBody]Alapadatok adat)
         {
             using (var ctx = new ModelNyilv())
             {
@@ -209,6 +209,114 @@ namespace Nyilv.Controllers
             }
 
         }
+        //Modify Cegadatok element
+        [HttpPost]
+        [Route(ControllerUpdateCegadatok.ControllerFormat)]
+        public IHttpActionResult PostCegadat([FromBody]Cegadatok adat)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                Cegadatok Item2Modify = ctx.Cegadatok
+                        .Where(c => c.CegID == adat.CegID).FirstOrDefault<Cegadatok>();
+                if (Item2Modify == null)
+                {
+                    ctx.Cegadatok.Add(adat);
+                }
+                else
+                {
+                    ctx.Entry(Item2Modify).CurrentValues.SetValues(adat);
+                }
+                ctx.SaveChanges();
+
+                return Ok();
+            }
+
+        }
+        //Modify Dokumentumok element
+        [HttpPost]
+        [Route(ControllerUpdateDokumentumok.ControllerFormat)]
+        public IHttpActionResult PostCegadat([FromBody]Dokumentumok adat)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                Dokumentumok Item2Modify = ctx.Dokumentumok
+                        .Where(c => c.DokumentumID == adat.DokumentumID).FirstOrDefault<Dokumentumok>();
+                if (Item2Modify == null)
+                {
+                    ctx.Dokumentumok.Add(adat);
+                }
+                else
+                {
+                    ctx.Entry(Item2Modify).CurrentValues.SetValues(adat);
+                }
+                ctx.SaveChanges();
+
+                return Ok();
+            }
+        }
+        // api/Alapadatok/remove/{id}
+        [HttpGet]
+        [Route(ControllerDeleteAlapadatById.ControllerFormat, Name = ControllerDeleteAlapadatById.ControllerName)]
+        public IHttpActionResult DeleteAlapadatok(int id)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                Alapadatok ceg = ctx.Alapadatok.Where(c => c.CegID == id).FirstOrDefault<Alapadatok>();
+                if (ceg == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    ctx.Alapadatok.Remove(ceg);
+                    ctx.SaveChanges();
+                    return Ok();
+                }                
+
+            }
+        }
+        // api/Cegadatok/remove/{id}
+        [HttpGet]
+        [Route(ControllerDeleteCegadatokById.ControllerFormat, Name = ControllerDeleteCegadatokById.ControllerName)]
+        public IHttpActionResult DeleteCegadatok(int id)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                Cegadatok ceg = ctx.Cegadatok.Where(c => c.CegID == id).FirstOrDefault<Cegadatok>();
+                if (ceg == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    ctx.Cegadatok.Remove(ceg);
+                    ctx.SaveChanges();
+                    return Ok();
+                }
+
+            }
+        }
+        // api/Dokumentumok/remove/{id}
+        [HttpGet]
+        [Route(ControllerDeleteDokumentumokById.ControllerFormat, Name = ControllerDeleteDokumentumokById.ControllerName)]
+        public IHttpActionResult DeleteDokumentumok(int id)
+        {
+            using (var ctx = new ModelNyilv())
+            {
+                Dokumentumok doc = ctx.Dokumentumok.Where(c => c.DokumentumID == id).FirstOrDefault<Dokumentumok>();
+                if (doc == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    ctx.Dokumentumok.Remove(doc);
+                    ctx.SaveChanges();
+                    return Ok();
+                }
+
+            }
+        }
 
         //Import XLS file
         [HttpPost]
@@ -220,14 +328,15 @@ namespace Nyilv.Controllers
             if (httpRequest.Files.Count > 0)
             {
                 var docfiles = new List<string>();
+                int i = 0;
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("~/" + "Temp");
+                    var filePath = HttpContext.Current.Server.MapPath("~/" + file + (i++).ToString() + ".xlsx");
                     postedFile.SaveAs(filePath);
                     docfiles.Add(filePath);
-
                 }
+                MyXlsImporter.ImportAlapadatok(docfiles);
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
             }
             else

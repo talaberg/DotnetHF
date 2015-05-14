@@ -50,8 +50,8 @@
   <ItemGroup>
     <Compile Include="Entities\Alapadatok.cs" />
     <Compile Include="Entities\Cegadatok.cs" />
-    <Compile Include="Entities\ModelNyilv.cs" />
     <Compile Include="Entities\Dokumentumok.cs" />
+    <Compile Include="Entities\ModelNyilv.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

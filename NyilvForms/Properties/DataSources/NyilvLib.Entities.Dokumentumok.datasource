@@ -7,4 +7,22 @@
 -->
 <GenericObjectDataSource DisplayName="Dokumentumok" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
    <TypeInfo>NyilvLib.Entities.Dokumentumok, NyilvLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeUISetting>
+      <PropertyUISettings>
+         <PropertyUISetting Name="CegID">
+            <ControlSettings>
+               <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
+               </ControlSetting>
+            </ControlSettings>
+         </PropertyUISetting>
+         <PropertyUISetting Name="DokumentumID">
+            <ControlSettings>
+               <ControlSetting ArtifactName="Microsoft:System.Windows.Forms:Form">
+                  <BindableControlInfo Name="[None]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
+               </ControlSetting>
+            </ControlSettings>
+         </PropertyUISetting>
+      </PropertyUISettings>
+   </TypeUISetting>
 </GenericObjectDataSource>
