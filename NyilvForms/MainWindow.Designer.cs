@@ -66,7 +66,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.alapadatokBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.alapadatokDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -364,7 +364,7 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem,
-            this.alapadatokBindingNavigatorSaveItem});
+            this.toolStripButtonEdit});
             this.alapadatokBindingNavigator.Location = new System.Drawing.Point(0, 0);
             this.alapadatokBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.alapadatokBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -378,12 +378,11 @@
             // 
             // bindingNavigatorAddNewItem
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(79, 22);
+            this.bindingNavigatorAddNewItem.Text = "Hozzáadás";
             // 
             // alapadatokBindingSource
             // 
@@ -398,12 +397,11 @@
             // 
             // bindingNavigatorDeleteItem
             // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(56, 22);
+            this.bindingNavigatorDeleteItem.Text = "Törlés";
             this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorMoveFirstItem
@@ -470,14 +468,15 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // alapadatokBindingNavigatorSaveItem
+            // toolStripButtonEdit
             // 
-            this.alapadatokBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.alapadatokBindingNavigatorSaveItem.Enabled = false;
-            this.alapadatokBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("alapadatokBindingNavigatorSaveItem.Image")));
-            this.alapadatokBindingNavigatorSaveItem.Name = "alapadatokBindingNavigatorSaveItem";
-            this.alapadatokBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.alapadatokBindingNavigatorSaveItem.Text = "Save Data";
+            this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
+            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(84, 22);
+            this.toolStripButtonEdit.Text = "Szerkesztés";
+            this.toolStripButtonEdit.ToolTipText = "Adatbázis szerkesztése";
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // alapadatokDataGridView
             // 
@@ -747,7 +746,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton alapadatokBindingNavigatorSaveItem;
         private System.Windows.Forms.SplitContainer splitContainerJobbOldal;
         private System.Windows.Forms.Panel panelCegAdat;
         private System.Windows.Forms.DataGridView alapadatokDataGridView;
@@ -779,6 +777,7 @@
         private System.Windows.Forms.ToolStripMenuItem aremelesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dokumentumokImportalasaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kilepesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
     }
 }
 
