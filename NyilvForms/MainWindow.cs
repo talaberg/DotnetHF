@@ -19,6 +19,7 @@ namespace NyilvForms
     public partial class MainWindow : Form
     {
         bool dataGridViewCellChanged;           //Indicates if a dataGridView cell is modified
+        int changedRowIndex;
 
         TreeNode currentnode;                   // Current Dokumentumok TreeNode reference
 
@@ -41,6 +42,7 @@ namespace NyilvForms
             comboBoxFindCondiditon.ValueMember = "Name";
 
             dataGridViewCellChanged = false;
+            alapadatokDataGridView.ReadOnly = true;
         }
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Event functions ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,21 +137,22 @@ namespace NyilvForms
                 UpdateDokumentumok(ID);
             }
         }
+        private void alapadatokDataGridView_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewCellChanged)
+            {
+                UpdateDatabase((Alapadatok)alapadatokDataGridView.Rows[changedRowIndex].DataBoundItem);
+                dataGridViewCellChanged = false;
+            }
+        }
 
         // DataGridView Cell value changed
         private void alapadatokDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             dataGridViewCellChanged = true;
+            changedRowIndex = e.RowIndex;
         }
         // DataGridView row leave
-        private void alapadatokDataGridView_RowLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewCellChanged)
-            {
-                UpdateDatabase((Alapadatok)alapadatokDataGridView.Rows[e.RowIndex].DataBoundItem);
-                dataGridViewCellChanged = false;
-            }
-        }
         // Delete DataGridView element
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
@@ -216,11 +219,27 @@ namespace NyilvForms
 	        }
             
         }
+        // Szerkesztés
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        {
+            if (alapadatokDataGridView.ReadOnly == true)
+            {
+                alapadatokDataGridView.ReadOnly = false;
+                toolStripButtonEdit.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                alapadatokDataGridView.ReadOnly = true;
+                toolStripButtonEdit.CheckState = CheckState.Unchecked;
+            }
+        }
         // Exit
         private void kilepesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+
 
     }
 }
