@@ -62,7 +62,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.GetAsync(ControllerGetCegadatokById.ControllerUrl(ID)).Result;
+                var resp = client.GetAsync(ControllerFormats.GetCegadatokById.ControllerUrl(ID)).Result;
 
                 var adat = resp.Content.ReadAsAsync<Cegadatok>().Result;
 
@@ -74,7 +74,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.GetAsync(ControllerGetDokumentumokById.ControllerUrl(ID)).Result;
+                var resp = client.GetAsync(ControllerFormats.GetDokumentumokById.ControllerUrl(ID)).Result;
 
                 var adat = resp.Content.ReadAsAsync<List<Dokumentumok>>().Result;
 
@@ -89,7 +89,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.GetAsync(ControllerGetAlapadatAll.ControllerUrl).Result;
+                var resp = client.GetAsync(ControllerFormats.GetAlapadatAll.ControllerUrl).Result;
                 resp.EnsureSuccessStatusCode();
 
                 var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
@@ -109,7 +109,7 @@ namespace NyilvForms
 
                 using (var client = new HttpClient())
                 {
-                    var resp = client.PutAsJsonAsync(ControllerFindAlapadat.ControllerUrl, query).Result;
+                    var resp = client.PutAsJsonAsync(ControllerFormats.FindAlapadat.ControllerUrl, query).Result;
                     resp.EnsureSuccessStatusCode();
 
                     var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
@@ -203,7 +203,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.PostAsJsonAsync(ControllerUpdateAlapadat.ControllerUrl, data).Result;
+                var resp = client.PostAsJsonAsync(ControllerFormats.UpdateAlapadat.ControllerUrl, data).Result;
                 resp.EnsureSuccessStatusCode();
             }
         }
@@ -212,7 +212,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.PostAsJsonAsync(ControllerUpdateCegadatok.ControllerUrl, data).Result;
+                var resp = client.PostAsJsonAsync(ControllerFormats.UpdateCegadatok.ControllerUrl, data).Result;
                 resp.EnsureSuccessStatusCode();
             }
         }
@@ -220,7 +220,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.PostAsJsonAsync(ControllerUpdateDokumentumok.ControllerUrl, data).Result;
+                var resp = client.PostAsJsonAsync(ControllerFormats.UpdateDokumentumok.ControllerUrl, data).Result;
                 resp.EnsureSuccessStatusCode();
             }
         }
@@ -229,21 +229,21 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.GetAsync(new Uri(ControllerDeleteAlapadatById.ControllerUrl(id))).Result;
+                var resp = client.GetAsync(new Uri(ControllerFormats.DeleteAlapadatById.ControllerUrl(id))).Result;
             }
         }
         void RemoveCegadatokElement(int id)
         {
             using (var client = new HttpClient())
             {
-                var resp = client.GetAsync(new Uri(ControllerDeleteCegadatokById.ControllerUrl(id))).Result;
+                var resp = client.GetAsync(new Uri(ControllerFormats.DeleteCegadatokById.ControllerUrl(id))).Result;
             }
         }
         void RemoveDokumentumokElement(int id)
         {
             using (var client = new HttpClient())
             {
-                var resp = client.GetAsync(new Uri(ControllerDeleteDokumentumokById.ControllerUrl(id))).Result;
+                var resp = client.GetAsync(new Uri(ControllerFormats.DeleteDokumentumokById.ControllerUrl(id))).Result;
             }
         }
         void DokumentumokModify()
@@ -282,7 +282,7 @@ namespace NyilvForms
         {
             using (var client = new HttpClient())
             {
-                var resp = client.PostAsJsonAsync(ControllerAremeles.ControllerUrl, p).Result;
+                var resp = client.PostAsJsonAsync(ControllerFormats.Aremeles.ControllerUrl, p).Result;
                 resp.EnsureSuccessStatusCode();
 
                 if (alapadatokDataGridView.CurrentCell != null)

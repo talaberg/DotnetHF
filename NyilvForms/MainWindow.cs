@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 using System.Net.Http;
 using System.Net;
-using System.Data.Entity;
 using NyilvLib;
 using NyilvLib.Entities;
 
@@ -74,11 +73,11 @@ namespace NyilvForms
                 string s = ofdImport.FileName;
                 if (importcommand == (int)ImportCaller.Ceg)
                 {
-                    client.UploadFileAsync(new Uri(ControllerImportCeg.ControllerUrl), ofdImport.FileName.ToString());
+                    client.UploadFileAsync(new Uri(ControllerFormats.ImportCeg.ControllerUrl), ofdImport.FileName.ToString());
                 }
                 else if (importcommand == (int)ImportCaller.Dokumentum)
                 {
-                    client.UploadFileAsync(new Uri(ControllerImportDokumentum.ControllerUrl), ofdImport.FileName.ToString());
+                    client.UploadFileAsync(new Uri(ControllerFormats.ImportDokumentum.ControllerUrl), ofdImport.FileName.ToString());
                 }                
             }
         }

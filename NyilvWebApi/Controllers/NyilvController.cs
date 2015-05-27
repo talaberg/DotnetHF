@@ -17,7 +17,7 @@ namespace Nyilv.Controllers
 
         // GET api/Alapadatok/{id}
         [HttpGet]
-        [Route(ControllerGetAlapadatById.ControllerFormat, Name = ControllerGetAlapadatById.ControllerName)]
+        [Route(ControllerFormats.GetAlapadatById.ControllerFormat, Name = ControllerFormats.GetAlapadatById.ControllerName)]
         public IHttpActionResult GetAlapadatok(int id)
         {
             using (var ctx = new  ModelNyilv())
@@ -33,7 +33,7 @@ namespace Nyilv.Controllers
         }
         // GET api/Cegadatok/{id}
         [HttpGet]
-        [Route(ControllerGetCegadatokById.ControllerFormat, Name = ControllerGetCegadatokById.ControllerName)]
+        [Route(ControllerFormats.GetCegadatokById.ControllerFormat, Name = ControllerFormats.GetCegadatokById.ControllerName)]
         public IHttpActionResult GetCegadatok(int id)
         {
             using (var ctx = new ModelNyilv())
@@ -50,7 +50,7 @@ namespace Nyilv.Controllers
 
         // GET api/Dokumentumok/{id}
         [HttpGet]
-        [Route(ControllerGetDokumentumokById.ControllerFormat, Name = ControllerGetDokumentumokById.ControllerName)]
+        [Route(ControllerFormats.GetDokumentumokById.ControllerFormat, Name = ControllerFormats.GetDokumentumokById.ControllerName)]
         public IHttpActionResult GetDokumentumok(int id)
         {
             using (var ctx = new ModelNyilv())
@@ -66,7 +66,7 @@ namespace Nyilv.Controllers
         }
         // GET api/Alapadatok/all
         [HttpGet]
-        [Route(ControllerGetAlapadatAll.ControllerFormat)]
+        [Route(ControllerFormats.GetAlapadatAll.ControllerFormat)]
         public IHttpActionResult GetAll()
         {
             using (var ctx = new ModelNyilv())
@@ -87,7 +87,7 @@ namespace Nyilv.Controllers
         
         // PUT: api/Alapadatok/find
         [HttpPut]
-        [Route(ControllerFindAlapadat.ControllerFormat)]
+        [Route(ControllerFormats.FindAlapadat.ControllerFormat)]
         public IHttpActionResult PutFind([FromBody]MyQuery query)
         {
             using (var ctx = new ModelNyilv())
@@ -188,7 +188,7 @@ namespace Nyilv.Controllers
 
         //Modify Alapadatok element
         [HttpPost]
-        [Route(ControllerUpdateAlapadat.ControllerFormat)]
+        [Route(ControllerFormats.UpdateAlapadat.ControllerFormat)]
         public IHttpActionResult PostAlapadat([FromBody]Alapadatok adat)
         {
             using (var ctx = new ModelNyilv())
@@ -211,7 +211,7 @@ namespace Nyilv.Controllers
         }
         //Modify Cegadatok element
         [HttpPost]
-        [Route(ControllerUpdateCegadatok.ControllerFormat)]
+        [Route(ControllerFormats.UpdateCegadatok.ControllerFormat)]
         public IHttpActionResult PostCegadat([FromBody]Cegadatok adat)
         {
             using (var ctx = new ModelNyilv())
@@ -234,7 +234,7 @@ namespace Nyilv.Controllers
         }
         //Modify Dokumentumok element
         [HttpPost]
-        [Route(ControllerUpdateDokumentumok.ControllerFormat)]
+        [Route(ControllerFormats.UpdateDokumentumok.ControllerFormat)]
         public IHttpActionResult PostCegadat([FromBody]Dokumentumok adat)
         {
             using (var ctx = new ModelNyilv())
@@ -256,7 +256,7 @@ namespace Nyilv.Controllers
         }
         // api/Alapadatok/remove/{id}
         [HttpGet]
-        [Route(ControllerDeleteAlapadatById.ControllerFormat, Name = ControllerDeleteAlapadatById.ControllerName)]
+        [Route(ControllerFormats.DeleteAlapadatById.ControllerFormat, Name = ControllerFormats.DeleteAlapadatById.ControllerName)]
         public IHttpActionResult DeleteAlapadatok(int id)
         {
             using (var ctx = new ModelNyilv())
@@ -277,7 +277,7 @@ namespace Nyilv.Controllers
         }
         // api/Cegadatok/remove/{id}
         [HttpGet]
-        [Route(ControllerDeleteCegadatokById.ControllerFormat, Name = ControllerDeleteCegadatokById.ControllerName)]
+        [Route(ControllerFormats.DeleteCegadatokById.ControllerFormat, Name = ControllerFormats.DeleteCegadatokById.ControllerName)]
         public IHttpActionResult DeleteCegadatok(int id)
         {
             using (var ctx = new ModelNyilv())
@@ -298,7 +298,7 @@ namespace Nyilv.Controllers
         }
         // api/Dokumentumok/remove/{id}
         [HttpGet]
-        [Route(ControllerDeleteDokumentumokById.ControllerFormat, Name = ControllerDeleteDokumentumokById.ControllerName)]
+        [Route(ControllerFormats.DeleteDokumentumokById.ControllerFormat, Name = ControllerFormats.DeleteDokumentumokById.ControllerName)]
         public IHttpActionResult DeleteDokumentumok(int id)
         {
             using (var ctx = new ModelNyilv())
@@ -320,7 +320,7 @@ namespace Nyilv.Controllers
 
         // api/aremeles/{ar}
         [HttpPost]
-        [Route(ControllerAremeles.ControllerFormat)]
+        [Route(ControllerFormats.Aremeles.ControllerFormat)]
         public IHttpActionResult Aremeles([FromBody]double ar)
         {
             using (var ctx = new ModelNyilv())
@@ -339,7 +339,7 @@ namespace Nyilv.Controllers
 
         //Import Ceg XLS file
         [HttpPost]
-        [Route(ControllerImportCeg.ControllerFormat)]
+        [Route(ControllerFormats.ImportCeg.ControllerFormat)]
         public HttpResponseMessage PostImportCeg()
         {
             HttpResponseMessage result = null;
@@ -400,7 +400,7 @@ namespace Nyilv.Controllers
         }
         //Import Dokumentum XLS file
         [HttpPost]
-        [Route(ControllerImportDokumentum.ControllerFormat)]
+        [Route(ControllerFormats.ImportDokumentum.ControllerFormat)]
         public HttpResponseMessage PostImportDokumentum()
         {
             HttpResponseMessage result = null;

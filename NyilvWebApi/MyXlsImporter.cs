@@ -17,12 +17,12 @@ namespace Nyilv
         public static List<Alapadatok> ImportAlapadatokResult { get { return importAlapadatokResult; } }
         public static List<Cegadatok> ImportCegadatokResult { get { return importCegadatokResult; } }
         public static List<Dokumentumok> ImportDokumentumokResult { get { return importDokumentumokResult; } }
-        public static void ImportCeg(List<string> filepathces)
+        public static void ImportCeg(List<string> filepath)
         {
             List<Alapadatok> importedAlapadatokItems = new List<Alapadatok>();
             List<Cegadatok> importedCegadatokItems = new List<Cegadatok>();
 
-            foreach (string file in filepathces)
+            foreach (string file in filepath)
             {
                Application xlApp = new Application();
 
@@ -31,7 +31,6 @@ namespace Nyilv
                 for (int i = 1; i <= xlWorkbook.Sheets.Count; i++)
                 {
                     _Worksheet xlWorksheet = (_Worksheet)xlWorkbook.Sheets[i];
-
 
                     int j = 1;
 
