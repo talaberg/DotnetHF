@@ -386,7 +386,7 @@
             // 
             // alapadatokBindingSource
             // 
-            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Alapadatok);
+            this.alapadatokBindingSource.DataSource = typeof(NyilvLib.Entities.alapadatok);
             // 
             // bindingNavigatorCountItem
             // 
@@ -605,7 +605,7 @@
             // 
             // cegadatokBindingSource
             // 
-            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.Cegadatok);
+            this.cegadatokBindingSource.DataSource = typeof(NyilvLib.Entities.cegadatok);
             // 
             // ceg_teljes_nevTextBox
             // 

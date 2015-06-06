@@ -11,16 +11,16 @@ namespace Nyilv
 {
     public static class MyXlsImporter
     {
-        static List<Alapadatok> importAlapadatokResult;
-        static List<Cegadatok> importCegadatokResult;
-        static List<Dokumentumok> importDokumentumokResult;
-        public static List<Alapadatok> ImportAlapadatokResult { get { return importAlapadatokResult; } }
-        public static List<Cegadatok> ImportCegadatokResult { get { return importCegadatokResult; } }
-        public static List<Dokumentumok> ImportDokumentumokResult { get { return importDokumentumokResult; } }
+        static List<alapadatok> importAlapadatokResult;
+        static List<cegadatok> importCegadatokResult;
+        static List<dokumentumok> importDokumentumokResult;
+        public static List<alapadatok> ImportAlapadatokResult { get { return importAlapadatokResult; } }
+        public static List<cegadatok> ImportCegadatokResult { get { return importCegadatokResult; } }
+        public static List<dokumentumok> ImportDokumentumokResult { get { return importDokumentumokResult; } }
         public static void ImportCeg(List<string> filepath)
         {
-            List<Alapadatok> importedAlapadatokItems = new List<Alapadatok>();
-            List<Cegadatok> importedCegadatokItems = new List<Cegadatok>();
+            List<alapadatok> importedAlapadatokItems = new List<alapadatok>();
+            List<cegadatok> importedCegadatokItems = new List<cegadatok>();
 
             foreach (string file in filepath)
             {
@@ -36,7 +36,7 @@ namespace Nyilv
 
                     while (((xlWorksheet.Cells[j, 1]) as Range).Value != null)
                     {
-                        Alapadatok adat = new Alapadatok();
+                        alapadatok adat = new alapadatok();
                         adat.CegID = Int32.Parse(((xlWorksheet.Cells[j, 1] as Range).Value).ToString());
                         adat.Szamlazas = ((xlWorksheet.Cells[j, 2] as Range).Value).ToString();
                         adat.Felelos = ((xlWorksheet.Cells[j, 3] as Range).Value).ToString();
@@ -53,7 +53,7 @@ namespace Nyilv
                         }
                         importedAlapadatokItems.Add(adat);
 
-                        Cegadatok ceg = new Cegadatok();
+                        cegadatok ceg = new cegadatok();
 
                         ceg.CegID = adat.CegID;
                         ceg.Ceg_teljes_nev = ((xlWorksheet.Cells[j, 8] as Range).Value).ToString();
@@ -72,7 +72,7 @@ namespace Nyilv
         }
         public static void ImportDokumentum(List<string> filepathces)
         {
-            List<Dokumentumok> importedDokumentumokItems = new List<Dokumentumok>();
+            List<dokumentumok> importedDokumentumokItems = new List<dokumentumok>();
 
             foreach (string file in filepathces)
             {
@@ -89,7 +89,7 @@ namespace Nyilv
 
                     while (((xlWorksheet.Cells[j, 1]) as Range).Value != null)
                     {
-                        Dokumentumok adat = new Dokumentumok();
+                        dokumentumok adat = new dokumentumok();
                         adat.CegID = Int32.Parse(((xlWorksheet.Cells[j, 1] as Range).Value).ToString());
                         adat.DokumentumID = Int32.Parse(((xlWorksheet.Cells[j, 2] as Range).Value).ToString());
                         adat.Dokumentum_tipus = ((xlWorksheet.Cells[j, 3] as Range).Value).ToString();

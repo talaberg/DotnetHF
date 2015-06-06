@@ -48,20 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Alapadatok.cs" />
-    <Compile Include="Entities\Cegadatok.cs" />
-    <Compile Include="Entities\Dokumentumok.cs" />
+    <Compile Include="Entities\alapadatok.cs" />
+    <Compile Include="Entities\cegadatok.cs" />
+    <Compile Include="Entities\dokumentumok.cs" />
     <Compile Include="Entities\ModelNyilv.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="CodeTemplates\EFModelFromDatabase\Context.cs.t4" />
     <None Include="CodeTemplates\EFModelFromDatabase\EntityType.cs.t4" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,8 +6,8 @@ namespace NyilvLib.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Dokumentumok")]
-    public partial class Dokumentumok
+    [Table("nyilv_db.dokumentumok")]
+    public partial class dokumentumok
     {
         public int CegID { get; set; }
 
@@ -21,6 +21,7 @@ namespace NyilvLib.Entities
         [Column(TypeName = "date")]
         public DateTime? Datum { get; set; }
 
+        [StringLength(1023)]
         public string Megjegyzes { get; set; }
     }
 }

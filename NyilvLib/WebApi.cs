@@ -8,7 +8,7 @@ namespace NyilvLib
 {
     public static class WebApi
     {
-        public static string HostAddress { get { return /*"http://localhost.fiddler:5112"*/ "http://localhost:5112"; } }
+        public static string HostAddress { get { return "http://localhost.fiddler:5112" /*"http://localhost:5112"*/; } }
     }
     public static class ControllerFormats
     {

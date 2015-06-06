@@ -101,10 +101,16 @@ namespace NyilvForms
         // Load all elements
         private void buttonLoadAll_Click(object sender, EventArgs e)
         {
-            List<Alapadatok> ClientList = GetAllAlapadat();
-            UpdateAlapadatokField(ClientList);
-            UpdateCegadatok(ClientList.First().CegID);
-            UpdateDokumentumok(ClientList.First().CegID);
+            List<alapadatok> ClientList = GetAllAlapadat();
+            if (ClientList != null)
+            {
+                if (ClientList.Count != 0)
+                {
+                    UpdateAlapadatokField(ClientList);
+                    UpdateCegadatok(ClientList.First().CegID);
+                    UpdateDokumentumok(ClientList.First().CegID);
+                }
+            }
         }
         // Find element combobox change event
         private void comboBoxFindElement_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,7 +146,7 @@ namespace NyilvForms
         {
             if (dataGridViewCellChanged)
             {
-                UpdateDatabase((Alapadatok)alapadatokDataGridView.Rows[changedRowIndex].DataBoundItem);
+                UpdateDatabase((alapadatok)alapadatokDataGridView.Rows[changedRowIndex].DataBoundItem);
                 dataGridViewCellChanged = false;
             }
         }
@@ -161,7 +167,7 @@ namespace NyilvForms
         // Delete Cegadatok field update
         private void buttonCegadatFrissit_Click(object sender, EventArgs e)
         {
-            Cegadatok ceg = (Cegadatok)cegadatokBindingSource.Current;
+            cegadatok ceg = (cegadatok)cegadatokBindingSource.Current;
             if (ceg != null)
             {
                 UpdateDatabase(ceg);
@@ -189,7 +195,7 @@ namespace NyilvForms
         // Add document
         private void hozzaadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Dokumentumok doc = new Dokumentumok{
+            dokumentumok doc = new dokumentumok{
                 CegID = currentCegID,
                  Dokumentum_tipus = currentnode.Parent != null ? currentnode.Parent.Text : currentnode.Text,
             };

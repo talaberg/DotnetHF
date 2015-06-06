@@ -16,27 +16,27 @@ namespace NyilvForms
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // UI update supplementary functions ----------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        private void UpdateAlapadatokField(List<Alapadatok> ClientList)
+        private void UpdateAlapadatokField(List<alapadatok> ClientList)
         {
             alapadatokBindingSource.Clear();
-            foreach (Alapadatok client in ClientList)
+            foreach (alapadatok client in ClientList)
             {
                 alapadatokBindingSource.Add(client);
             }
         }
-        private void UpdateCegadatokField(Cegadatok ceg)
+        private void UpdateCegadatokField(cegadatok ceg)
         {
             cegadatokBindingSource.Clear();
             cegadatokBindingSource.Add(ceg);
         }
 
-        private void UpdateDokumentumokField(List<Dokumentumok> documents)
+        private void UpdateDokumentumokField(List<dokumentumok> documents)
         {
             treeViewDokumentumok.Nodes.Clear();
             documents.OrderBy(c => c.Dokumentum_tipus);
             if (documents.Count != 0)
             {
-                foreach (Dokumentumok doc in documents)
+                foreach (dokumentumok doc in documents)
                 {
                     TreeNode t;
                     if (treeViewDokumentumok.Nodes.ContainsKey(doc.Dokumentum_tipus))
@@ -64,9 +64,9 @@ namespace NyilvForms
             {
                 var resp = client.GetAsync(ControllerFormats.GetCegadatokById.ControllerUrl(ID)).Result;
 
-                var adat = resp.Content.ReadAsAsync<Cegadatok>().Result;
+                var adat = resp.Content.ReadAsAsync<cegadatok>().Result;
 
-                if (adat == null) adat = new Cegadatok { CegID = ID };
+                if (adat == null) adat = new cegadatok { CegID = ID };
                 UpdateCegadatokField(adat);
             }
         }
@@ -76,7 +76,7 @@ namespace NyilvForms
             {
                 var resp = client.GetAsync(ControllerFormats.GetDokumentumokById.ControllerUrl(ID)).Result;
 
-                var adat = resp.Content.ReadAsAsync<List<Dokumentumok>>().Result;
+                var adat = resp.Content.ReadAsAsync<List<dokumentumok>>().Result;
 
                 UpdateDokumentumokField(adat);
             }
@@ -85,14 +85,14 @@ namespace NyilvForms
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Other functions ----------------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        List<Alapadatok> GetAllAlapadat()
+        List<alapadatok> GetAllAlapadat()
         {
             using (var client = new HttpClient())
             {
                 var resp = client.GetAsync(ControllerFormats.GetAlapadatAll.ControllerUrl).Result;
                 resp.EnsureSuccessStatusCode();
 
-                var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
+                var adat = resp.Content.ReadAsAsync<List<alapadatok>>().Result;
 
                 return adat;
             }
@@ -112,7 +112,7 @@ namespace NyilvForms
                     var resp = client.PutAsJsonAsync(ControllerFormats.FindAlapadat.ControllerUrl, query).Result;
                     resp.EnsureSuccessStatusCode();
 
-                    var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
+                    var adat = resp.Content.ReadAsAsync<List<alapadatok>>().Result;
 
 
                     if (adat.Count != 0)
@@ -134,7 +134,7 @@ namespace NyilvForms
 
         void ComboBoxFindElementInit()
         {
-            foreach (var prop in new Alapadatok().GetType().GetProperties())
+            foreach (var prop in new alapadatok().GetType().GetProperties())
             {
                 var element = new ComboBoxElementItem() { Name = prop.Name, Type = prop.PropertyType };
                 comboBoxFindElement.Items.Add(element);
@@ -199,7 +199,7 @@ namespace NyilvForms
             }
         }
 
-        void UpdateDatabase(Alapadatok data)
+        void UpdateDatabase(alapadatok data)
         {
             using (var client = new HttpClient())
             {
@@ -208,7 +208,7 @@ namespace NyilvForms
             }
         }
 
-        void UpdateDatabase(Cegadatok data)
+        void UpdateDatabase(cegadatok data)
         {
             using (var client = new HttpClient())
             {
@@ -216,7 +216,7 @@ namespace NyilvForms
                 resp.EnsureSuccessStatusCode();
             }
         }
-        void UpdateDatabase(Dokumentumok data)
+        void UpdateDatabase(dokumentumok data)
         {
             using (var client = new HttpClient())
             {
@@ -248,10 +248,10 @@ namespace NyilvForms
         }
         void DokumentumokModify()
         {
-            Dokumentumok doc;
+            dokumentumok doc;
             if (currentnode.Parent != null) // child clicked
             {
-                doc = new Dokumentumok
+                doc = new dokumentumok
                 {
                     DokumentumID = (int)currentnode.Tag,
                     CegID = currentCegID,
@@ -262,7 +262,7 @@ namespace NyilvForms
             }
             else //category clicked
             {
-                doc = new Dokumentumok
+                doc = new dokumentumok
                 {
                     CegID = currentCegID,
                     Dokumentum_tipus = currentnode.Text
