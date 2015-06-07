@@ -13,8 +13,8 @@ namespace NyilvForms
 {
     public partial class ManageDocument : Form
     {
-        dokumentumok givenDocument;
-        public dokumentumok Document
+        Dokumentumok givenDocument;
+        public Dokumentumok Document
         { 
             get
                 {
@@ -29,7 +29,7 @@ namespace NyilvForms
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
         }
-        public ManageDocument(dokumentumok doc)
+        public ManageDocument(Dokumentumok doc)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;

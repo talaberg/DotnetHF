@@ -7,8 +7,9 @@ using System.Web.Http;
 using System.Web;
 using NyilvLib;
 using NyilvLib.Entities;
-using System.Data.Entity;
+//using System.Data.Entity;
 using System.Reflection;
+//using MySql.Data.Entity;
 
 namespace Nyilv.Controllers
 {
@@ -22,7 +23,7 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new  ModelNyilv())
             {
-                var ceg = ctx.alapadatok.SingleOrDefault(c => c.CegID == id);
+                var ceg = ctx.Alapadatok.SingleOrDefault(c => c.CegID == id);
                 if (ceg == null)
                 {
                     return NotFound();
@@ -38,7 +39,7 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                var ceg = ctx.cegadatok.SingleOrDefault(c => c.CegID == id);
+                var ceg = ctx.Cegadatok.SingleOrDefault(c => c.CegID == id);
                 if (ceg == null)
                 {
                     return NotFound();
@@ -55,7 +56,7 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                var doc = ctx.dokumentumok.Where(c => c.CegID == id).ToList<dokumentumok>();
+                var doc = ctx.Dokumentumok.Where(c => c.CegID == id).ToList<Dokumentumok>();
                 if (doc == null)
                 {
                     return NotFound();
@@ -71,8 +72,8 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                var cegek = new List<alapadatok>();
-                foreach (var ceg in ctx.alapadatok)
+                var cegek = new List<Alapadatok>();
+                foreach (var ceg in ctx.Alapadatok)
                 {
                     cegek.Add(ceg);
                     
@@ -92,84 +93,84 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                List<alapadatok> result = null;
+                List<Alapadatok> result = null;
                 switch (query.Item2Find)
 	            {
                     case "CegID" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
                                 int val = (int)Int32.Parse(query.Value);
-                                result = ctx.alapadatok.Where(c => c.CegID == val).ToList<alapadatok>();
+                                result = ctx.Alapadatok.Where(c => c.CegID == val).ToList<Alapadatok>();
                         }
                         break;
 
                     case "Szamlazas" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Szamlazas == query.Value).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Szamlazas == query.Value).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.ContainsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Szamlazas.Contains(query.Value)).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Szamlazas.Contains(query.Value)).ToList<Alapadatok>();
                         }
                         break;
 
                     case "Felelos" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Felelos == query.Value).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Felelos == query.Value).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.ContainsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Felelos.Contains(query.Value)).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Felelos.Contains(query.Value)).ToList<Alapadatok>();
                         }
                         break;
 
                     case "Cegnev" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Cegnev == query.Value).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Cegnev == query.Value).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.ContainsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Cegnev.Contains(query.Value)).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Cegnev.Contains(query.Value)).ToList<Alapadatok>();
                         }
                         break;
 
                     case "Ceg_forma" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Ceg_forma == query.Value).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Ceg_forma == query.Value).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.ContainsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Ceg_forma.Contains(query.Value)).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Ceg_forma.Contains(query.Value)).ToList<Alapadatok>();
                         }
                         break;
 
                     case "Hivatkozas" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Hivatkozas == query.Value).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Hivatkozas == query.Value).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.ContainsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Hivatkozas.Contains(query.Value)).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Hivatkozas.Contains(query.Value)).ToList<Alapadatok>();
                         }
                         break;
 
                     case "Felfuggesztett" :
                         if(query.Condition == MyQuery.EqualsCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Felfuggesztett == bool.Parse(query.Value)).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Felfuggesztett == bool.Parse(query.Value)).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.TrueCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Felfuggesztett == true).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Felfuggesztett == true).ToList<Alapadatok>();
                         }
                         else if (query.Condition == MyQuery.FalseCondition)
                         {
-                            result = ctx.alapadatok.Where(c => c.Felfuggesztett != true).ToList<alapadatok>();
+                            result = ctx.Alapadatok.Where(c => c.Felfuggesztett != true).ToList<Alapadatok>();
                         }
                         break;
 
@@ -189,15 +190,15 @@ namespace Nyilv.Controllers
         //Modify Alapadatok element
         [HttpPost]
         [Route(ControllerFormats.UpdateAlapadat.ControllerFormat)]
-        public IHttpActionResult PostAlapadat([FromBody]alapadatok adat)
+        public IHttpActionResult PostAlapadat([FromBody]Alapadatok adat)
         {
             using (var ctx = new ModelNyilv())
             {
-                alapadatok Item2Modify = ctx.alapadatok
-                        .Where(c => c.CegID == adat.CegID).FirstOrDefault<alapadatok>();
+                Alapadatok Item2Modify = ctx.Alapadatok
+                        .Where(c => c.CegID == adat.CegID).FirstOrDefault<Alapadatok>();
                 if(Item2Modify == null)
                 {
-                    ctx.alapadatok.Add(adat);
+                    ctx.Alapadatok.Add(adat);
                 }
                 else
                 {
@@ -212,15 +213,15 @@ namespace Nyilv.Controllers
         //Modify Cegadatok element
         [HttpPost]
         [Route(ControllerFormats.UpdateCegadatok.ControllerFormat)]
-        public IHttpActionResult PostCegadat([FromBody]cegadatok adat)
+        public IHttpActionResult PostCegadat([FromBody]Cegadatok adat)
         {
             using (var ctx = new ModelNyilv())
             {
-                cegadatok Item2Modify = ctx.cegadatok
-                        .Where(c => c.CegID == adat.CegID).FirstOrDefault<cegadatok>();
+                Cegadatok Item2Modify = ctx.Cegadatok
+                        .Where(c => c.CegID == adat.CegID).FirstOrDefault<Cegadatok>();
                 if (Item2Modify == null)
                 {
-                    ctx.cegadatok.Add(adat);
+                    ctx.Cegadatok.Add(adat);
                 }
                 else
                 {
@@ -235,15 +236,15 @@ namespace Nyilv.Controllers
         //Modify Dokumentumok element
         [HttpPost]
         [Route(ControllerFormats.UpdateDokumentumok.ControllerFormat)]
-        public IHttpActionResult PostCegadat([FromBody]dokumentumok adat)
+        public IHttpActionResult PostCegadat([FromBody]Dokumentumok adat)
         {
             using (var ctx = new ModelNyilv())
             {
-                dokumentumok Item2Modify = ctx.dokumentumok
-                        .Where(c => c.DokumentumID == adat.DokumentumID).FirstOrDefault<dokumentumok>();
+                Dokumentumok Item2Modify = ctx.Dokumentumok
+                        .Where(c => c.DokumentumID == adat.DokumentumID).FirstOrDefault<Dokumentumok>();
                 if (Item2Modify == null)
                 {
-                    ctx.dokumentumok.Add(adat);
+                    ctx.Dokumentumok.Add(adat);
                 }
                 else
                 {
@@ -261,14 +262,14 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                alapadatok ceg = ctx.alapadatok.Where(c => c.CegID == id).FirstOrDefault<alapadatok>();
+                Alapadatok ceg = ctx.Alapadatok.Where(c => c.CegID == id).FirstOrDefault<Alapadatok>();
                 if (ceg == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    ctx.alapadatok.Remove(ceg);
+                    ctx.Alapadatok.Remove(ceg);
                     ctx.SaveChanges();
                     return Ok();
                 }                
@@ -282,14 +283,14 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                cegadatok ceg = ctx.cegadatok.Where(c => c.CegID == id).FirstOrDefault<cegadatok>();
+                Cegadatok ceg = ctx.Cegadatok.Where(c => c.CegID == id).FirstOrDefault<Cegadatok>();
                 if (ceg == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    ctx.cegadatok.Remove(ceg);
+                    ctx.Cegadatok.Remove(ceg);
                     ctx.SaveChanges();
                     return Ok();
                 }
@@ -303,14 +304,14 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                dokumentumok doc = ctx.dokumentumok.Where(c => c.DokumentumID == id).FirstOrDefault<dokumentumok>();
+                Dokumentumok doc = ctx.Dokumentumok.Where(c => c.DokumentumID == id).FirstOrDefault<Dokumentumok>();
                 if (doc == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    ctx.dokumentumok.Remove(doc);
+                    ctx.Dokumentumok.Remove(doc);
                     ctx.SaveChanges();
                     return Ok();
                 }
@@ -325,7 +326,7 @@ namespace Nyilv.Controllers
         {
             using (var ctx = new ModelNyilv())
             {
-                foreach (var ceg in ctx.cegadatok)
+                foreach (var ceg in ctx.Cegadatok)
                 {
                     if (ceg.Tarifa != null)
                     {
@@ -357,31 +358,31 @@ namespace Nyilv.Controllers
                 }
                 MyXlsImporter.ImportCeg(docfiles);
 
-                List<alapadatok> importedItems = MyXlsImporter.ImportAlapadatokResult;
-                List<cegadatok> importedCegadatokItems = MyXlsImporter.ImportCegadatokResult;
+                List<Alapadatok> importedItems = MyXlsImporter.ImportAlapadatokResult;
+                List<Cegadatok> importedCegadatokItems = MyXlsImporter.ImportCegadatokResult;
 
                 using (var ctx = new ModelNyilv())
                 {
-                    foreach (alapadatok item in importedItems)
+                    foreach (Alapadatok item in importedItems)
                     {
-                        alapadatok Item2Modify = ctx.alapadatok
-                                .Where(c => c.CegID == item.CegID).FirstOrDefault<alapadatok>();
+                        Alapadatok Item2Modify = ctx.Alapadatok
+                                .Where(c => c.CegID == item.CegID).FirstOrDefault<Alapadatok>();
                         if (Item2Modify == null)
                         {
-                            ctx.alapadatok.Add(item);
+                            ctx.Alapadatok.Add(item);
                         }
                         else
                         {
                            // ctx.Entry(Item2Modify).CurrentValues.SetValues(item);
                         }                        
                     }
-                    foreach (cegadatok item in importedCegadatokItems)
+                    foreach (Cegadatok item in importedCegadatokItems)
                     {
-                        cegadatok Item2Modify = ctx.cegadatok
-                                .Where(c => c.CegID == item.CegID).FirstOrDefault<cegadatok>();
+                        Cegadatok Item2Modify = ctx.Cegadatok
+                                .Where(c => c.CegID == item.CegID).FirstOrDefault<Cegadatok>();
                         if (Item2Modify == null)
                         {
-                            ctx.cegadatok.Add(item);
+                            ctx.Cegadatok.Add(item);
                         }
                         else
                         {
@@ -418,17 +419,17 @@ namespace Nyilv.Controllers
                 }
                 MyXlsImporter.ImportDokumentum(docfiles);
 
-                List<dokumentumok> importedItems = MyXlsImporter.ImportDokumentumokResult;
+                List<Dokumentumok> importedItems = MyXlsImporter.ImportDokumentumokResult;
 
                 using (var ctx = new ModelNyilv())
                 {
-                    foreach (dokumentumok item in importedItems)
+                    foreach (Dokumentumok item in importedItems)
                     {
-                        dokumentumok Item2Modify = ctx.dokumentumok
-                                .Where(c => c.DokumentumID == item.DokumentumID).FirstOrDefault<dokumentumok>();
+                        Dokumentumok Item2Modify = ctx.Dokumentumok
+                                .Where(c => c.DokumentumID == item.DokumentumID).FirstOrDefault<Dokumentumok>();
                         if (Item2Modify == null)
                         {
-                            ctx.dokumentumok.Add(item);
+                            ctx.Dokumentumok.Add(item);
                         }
                         else
                         {

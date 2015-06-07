@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2592D3AF-1293-4D1D-85C5-A950C0E3E413}</ProjectGuid>
+    <ProjectGuid>{96B270C0-D41A-447E-8168-F292B957B51F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NyilvLib</RootNamespace>
@@ -36,6 +36,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="JamesDibble.ApplicationFramework.Data.Core">
+      <HintPath>..\packages\JamesDibble.ApplicationFramework.Data.Core.1.1.0.67\lib\net45\JamesDibble.ApplicationFramework.Data.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="JamesDibble.ApplicationFramework.Data.Persistence.EntityFrameworkCodeFirst">
+      <HintPath>..\packages\JamesDibble.ApplicationFramework.Data.Persistence.EntityFrameworkCodeFirst.1.1.0.67\lib\net45\JamesDibble.ApplicationFramework.Data.Persistence.EntityFrameworkCodeFirst.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -48,25 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\alapadatok.cs" />
-    <Compile Include="Entities\cegadatok.cs" />
-    <Compile Include="Entities\dokumentumok.cs" />
+    <Compile Include="Entities\Alapadatok.cs" />
+    <Compile Include="Entities\Cegadatok.cs" />
+    <Compile Include="Entities\Dokumentumok.cs" />
     <Compile Include="Entities\ModelNyilv.cs" />
     <Compile Include="MyQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApi.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
     <None Include="CodeTemplates\EFModelFromDatabase\Context.cs.t4" />
     <None Include="CodeTemplates\EFModelFromDatabase\EntityType.cs.t4" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

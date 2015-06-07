@@ -6,17 +6,15 @@ namespace NyilvLib.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("nyilv_db.cegadatok")]
-    public partial class cegadatok
+    [Table("Cegadatok")]
+    public partial class Cegadatok
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CegID { get; set; }
 
-        [StringLength(255)]
         public string Ceg_teljes_nev { get; set; }
 
-        [StringLength(255)]
         public string Telephely { get; set; }
 
         [StringLength(50)]

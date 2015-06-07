@@ -13,6 +13,8 @@ using System.Net;
 using NyilvLib;
 using NyilvLib.Entities;
 
+using System.Text.RegularExpressions;
+
 namespace NyilvForms
 {
     public partial class MainWindow : Form
@@ -28,9 +30,7 @@ namespace NyilvForms
         public MainWindow()
         {
             InitializeComponent();
-
-            
-
+            tarifaTextBox.DataBindings["Text"].NullValue = string.Empty;
 
             //Init ComboBox parameteres
                 //Make ComboBoxes not editable
@@ -101,7 +101,7 @@ namespace NyilvForms
         // Load all elements
         private void buttonLoadAll_Click(object sender, EventArgs e)
         {
-            List<alapadatok> ClientList = GetAllAlapadat();
+            List<Alapadatok> ClientList = GetAllAlapadat();
             if (ClientList != null)
             {
                 if (ClientList.Count != 0)
@@ -146,7 +146,7 @@ namespace NyilvForms
         {
             if (dataGridViewCellChanged)
             {
-                UpdateDatabase((alapadatok)alapadatokDataGridView.Rows[changedRowIndex].DataBoundItem);
+                UpdateDatabase((Alapadatok)alapadatokDataGridView.Rows[changedRowIndex].DataBoundItem);
                 dataGridViewCellChanged = false;
             }
         }
@@ -167,7 +167,7 @@ namespace NyilvForms
         // Delete Cegadatok field update
         private void buttonCegadatFrissit_Click(object sender, EventArgs e)
         {
-            cegadatok ceg = (cegadatok)cegadatokBindingSource.Current;
+            Cegadatok ceg = (Cegadatok)cegadatokBindingSource.Current;
             if (ceg != null)
             {
                 UpdateDatabase(ceg);
@@ -190,12 +190,45 @@ namespace NyilvForms
                 }
             }
         }
+        private void tarifaTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if ( (tarifaTextBox.Text != "") && !Regex.IsMatch(tarifaTextBox.Text, @"^\d+$"))
+            {
+                e.Cancel = true;
+                tarifaTextBox.Select(0, tarifaTextBox.Text.Length);
+
+                string errorMsg = "Helytelen számformátum!";
+                this.errorProvider.SetError(tarifaTextBox, errorMsg);
+            }
+            else
+            {
+                this.errorProvider.SetError(tarifaTextBox, null);
+            }            
+        }
+        private void emailTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            string emailString = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+            
+            if (!Regex.IsMatch(emailTextBox.Text, emailString, RegexOptions.IgnoreCase) && (emailTextBox.Text != "") )
+            {
+                e.Cancel = true;
+                emailTextBox.Select(0, emailTextBox.Text.Length);
+
+                string errorMsg = "Helytelen e-mail formátum!";
+                this.errorProvider.SetError(emailTextBox, errorMsg);
+            }
+            else
+            {
+                this.errorProvider.SetError(emailTextBox, null);
+            }
+            
+        }
 
         //      Toolstrip events --------------------------------------------------------------------------------------------------------------------
         // Add document
         private void hozzaadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dokumentumok doc = new dokumentumok{
+            Dokumentumok doc = new Dokumentumok{
                 CegID = currentCegID,
                  Dokumentum_tipus = currentnode.Parent != null ? currentnode.Parent.Text : currentnode.Text,
             };
@@ -243,6 +276,12 @@ namespace NyilvForms
         {
             this.Close();
         }
+
+
+
+
+
+
 
 
 

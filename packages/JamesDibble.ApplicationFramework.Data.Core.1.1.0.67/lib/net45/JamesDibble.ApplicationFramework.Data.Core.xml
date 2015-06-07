@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JamesDibble.ApplicationFramework.Data.Core</name>
+    </assembly>
+    <members>
+        <member name="T:JamesDibble.ApplicationFramework.Data.IPersistedObject">
+            <summary>
+            Implementing classes represent an object to be managed by an <see cref="!:IPersistenceManager"/>.
+            </summary>
+        </member>
+        <member name="T:JamesDibble.ApplicationFramework.Data.IUniqueObject`1">
+            <summary>
+            Implementing classes represent an object that can be identified by a single primary key.
+            </summary>
+            <typeparam name="T">
+            The type of the unique identifier.
+            </typeparam>
+        </member>
+        <member name="M:JamesDibble.ApplicationFramework.Data.IUniqueObject`1.SetNewId(`0)">
+            <summary>
+            Set the unique identifier of this <see cref="T:JamesDibble.ApplicationFramework.Data.IUniqueObject`1"/>.
+            </summary>
+            <param name="newId">
+            The new identifier.
+            </param>
+        </member>
+        <member name="P:JamesDibble.ApplicationFramework.Data.IUniqueObject`1.Id">
+            <summary>
+            Gets unique identifier of this <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="T:JamesDibble.ApplicationFramework.Data.UniqueObject`1">
+            <summary>
+            A base class for <see cref="T:JamesDibble.ApplicationFramework.Data.IUniqueObject`1"/>s.
+            </summary>
+            <typeparam name="T">
+            The type of the unique identifier.
+            </typeparam>
+        </member>
+        <member name="M:JamesDibble.ApplicationFramework.Data.UniqueObject`1.#ctor">
+            <summary>
+            Initialises a new instance of the <see cref="T:JamesDibble.ApplicationFramework.Data.UniqueObject`1"/> class.
+            </summary>
+        </member>
+        <member name="M:JamesDibble.ApplicationFramework.Data.UniqueObject`1.#ctor(`0)">
+            <summary>
+            Initialises a new instance of the <see cref="T:JamesDibble.ApplicationFramework.Data.UniqueObject`1"/> class.
+            </summary>
+            <param name="id">
+            The identifier of this <see cref="T:JamesDibble.ApplicationFramework.Data.UniqueObject`1"/>.
+            </param>
+        </member>
+        <member name="M:JamesDibble.ApplicationFramework.Data.UniqueObject`1.SetNewId(`0)">
+            <summary>
+            Set the unique identifier of this <see cref="T:JamesDibble.ApplicationFramework.Data.IUniqueObject`1"/>.
+            </summary>
+            <param name="newId">
+            The new identifier.
+            </param>
+        </member>
+        <member name="P:JamesDibble.ApplicationFramework.Data.UniqueObject`1.Id">
+            <summary>
+            Gets or sets the unique identifier of this <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+    </members>
+</doc>

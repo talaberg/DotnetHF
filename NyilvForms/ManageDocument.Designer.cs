@@ -117,7 +117,7 @@
             // 
             // dokumentumokBindingSource
             // 
-            this.dokumentumokBindingSource.DataSource = typeof(NyilvLib.Entities.dokumentumok);
+            this.dokumentumokBindingSource.DataSource = typeof(NyilvLib.Entities.Dokumentumok);
             // 
             // ManageDocument
             // 

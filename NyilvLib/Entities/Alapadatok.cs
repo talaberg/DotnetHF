@@ -6,8 +6,8 @@ namespace NyilvLib.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("nyilv_db.alapadatok")]
-    public partial class alapadatok
+    [Table("Alapadatok")]
+    public partial class Alapadatok
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -26,7 +26,6 @@ namespace NyilvLib.Entities
         [StringLength(50)]
         public string Ceg_forma { get; set; }
 
-        [StringLength(1023)]
         public string Hivatkozas { get; set; }
 
         public bool? Felfuggesztett { get; set; }
