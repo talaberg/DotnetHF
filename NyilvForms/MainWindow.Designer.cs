@@ -43,6 +43,7 @@
             this.kilepesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eszközökToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aremelesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdImport = new System.Windows.Forms.OpenFileDialog();
             this.buttonLoadAll = new System.Windows.Forms.Button();
             this.panelGombok = new System.Windows.Forms.Panel();
@@ -90,7 +91,6 @@
             this.modositasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eltavolitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.aBCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -230,9 +230,15 @@
             // aremelesToolStripMenuItem
             // 
             this.aremelesToolStripMenuItem.Name = "aremelesToolStripMenuItem";
-            this.aremelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aremelesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.aremelesToolStripMenuItem.Text = "Áremelés...";
             this.aremelesToolStripMenuItem.Click += new System.EventHandler(this.aremelesToolStripMenuItem_Click);
+            // 
+            // aBCToolStripMenuItem
+            // 
+            this.aBCToolStripMenuItem.Name = "aBCToolStripMenuItem";
+            this.aBCToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.aBCToolStripMenuItem.Text = "ABC";
             // 
             // ofdImport
             // 
@@ -688,12 +694,6 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // aBCToolStripMenuItem
-            // 
-            this.aBCToolStripMenuItem.Name = "aBCToolStripMenuItem";
-            this.aBCToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aBCToolStripMenuItem.Text = "ABC";
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -706,6 +706,7 @@
             this.MinimumSize = new System.Drawing.Size(700, 300);
             this.Name = "MainWindow";
             this.Text = "Ügyfélnyilvántartás";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelGombok.ResumeLayout(false);

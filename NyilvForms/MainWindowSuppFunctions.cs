@@ -60,26 +60,24 @@ namespace NyilvForms
         }
         void UpdateCegadatok(int ID)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.GetAsync(ControllerFormats.GetCegadatokById.ControllerUrl(ID)).Result;
 
-                var adat = resp.Content.ReadAsAsync<Cegadatok>().Result;
+            var resp = client.GetAsync(ControllerFormats.GetCegadatokById.ControllerUrl(ID)).Result;
 
-                if (adat == null) adat = new Cegadatok { CegID = ID };
-                UpdateCegadatokField(adat);
-            }
+            var adat = resp.Content.ReadAsAsync<Cegadatok>().Result;
+
+            if (adat == null) adat = new Cegadatok { CegID = ID };
+            UpdateCegadatokField(adat);
+
         }
         void UpdateDokumentumok(int ID)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.GetAsync(ControllerFormats.GetDokumentumokById.ControllerUrl(ID)).Result;
 
-                var adat = resp.Content.ReadAsAsync<List<Dokumentumok>>().Result;
+            var resp = client.GetAsync(ControllerFormats.GetDokumentumokById.ControllerUrl(ID)).Result;
 
-                UpdateDokumentumokField(adat);
-            }
+            var adat = resp.Content.ReadAsAsync<List<Dokumentumok>>().Result;
+
+            UpdateDokumentumokField(adat);
+
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -87,15 +85,12 @@ namespace NyilvForms
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         List<Alapadatok> GetAllAlapadat()
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.GetAsync(ControllerFormats.GetAlapadatAll.ControllerUrl).Result;
-                resp.EnsureSuccessStatusCode();
+            var resp = client.GetAsync(ControllerFormats.GetAlapadatAll.ControllerUrl).Result;
+            resp.EnsureSuccessStatusCode();
 
-                var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
+            var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
 
-                return adat;
-            }
+            return adat;
         }
 
         void RunFindQUery()
@@ -107,28 +102,26 @@ namespace NyilvForms
 
                 var query = new MyQuery() { Item2Find = Item.Name, Condition = ItemCondition.Condition, Value = textBoxFind.Text };
 
-                using (var client = new HttpClient())
+                var resp = client.PutAsJsonAsync(ControllerFormats.FindAlapadat.ControllerUrl, query).Result;
+                resp.EnsureSuccessStatusCode();
+
+                var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
+
+
+                if (adat.Count != 0)
                 {
-                    var resp = client.PutAsJsonAsync(ControllerFormats.FindAlapadat.ControllerUrl, query).Result;
-                    resp.EnsureSuccessStatusCode();
-
-                    var adat = resp.Content.ReadAsAsync<List<Alapadatok>>().Result;
-
-
-                    if (adat.Count != 0)
-                    {
-                        UpdateAlapadatokField(adat);
-                        UpdateCegadatok(adat.First().CegID);
-                        UpdateDokumentumok(adat.First().CegID);
-                    }
-                    else
-                    {
-                        treeViewDokumentumok.Nodes.Clear();
-                        alapadatokBindingSource.Clear();
-                        cegadatokBindingSource.Clear();
-                    }
-
+                    UpdateAlapadatokField(adat);
+                    UpdateCegadatok(adat.First().CegID);
+                    UpdateDokumentumok(adat.First().CegID);
                 }
+                else
+                {
+                    treeViewDokumentumok.Nodes.Clear();
+                    alapadatokBindingSource.Clear();
+                    cegadatokBindingSource.Clear();
+                }
+
+               
             }
         }
 
@@ -201,50 +194,42 @@ namespace NyilvForms
 
         void UpdateDatabase(Alapadatok data)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.PostAsJsonAsync(ControllerFormats.UpdateAlapadat.ControllerUrl, data).Result;
-                resp.EnsureSuccessStatusCode();
-            }
+
+            var resp = client.PostAsJsonAsync(ControllerFormats.UpdateAlapadat.ControllerUrl, data).Result;
+            resp.EnsureSuccessStatusCode();
+
         }
 
         void UpdateDatabase(Cegadatok data)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.PostAsJsonAsync(ControllerFormats.UpdateCegadatok.ControllerUrl, data).Result;
-                resp.EnsureSuccessStatusCode();
-            }
+
+            var resp = client.PostAsJsonAsync(ControllerFormats.UpdateCegadatok.ControllerUrl, data).Result;
+            resp.EnsureSuccessStatusCode();
+
         }
         void UpdateDatabase(Dokumentumok data)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.PostAsJsonAsync(ControllerFormats.UpdateDokumentumok.ControllerUrl, data).Result;
-                resp.EnsureSuccessStatusCode();
-            }
+
+            var resp = client.PostAsJsonAsync(ControllerFormats.UpdateDokumentumok.ControllerUrl, data).Result;
+            resp.EnsureSuccessStatusCode();
+
         }
 
         void RemoveAlapadatokElement(int id)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.GetAsync(new Uri(ControllerFormats.DeleteAlapadatById.ControllerUrl(id))).Result;
-            }
+            var resp = client.GetAsync(new Uri(ControllerFormats.DeleteAlapadatById.ControllerUrl(id))).Result;
+
         }
         void RemoveCegadatokElement(int id)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.GetAsync(new Uri(ControllerFormats.DeleteCegadatokById.ControllerUrl(id))).Result;
-            }
+            var resp = client.GetAsync(new Uri(ControllerFormats.DeleteCegadatokById.ControllerUrl(id))).Result;
+
         }
         void RemoveDokumentumokElement(int id)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.GetAsync(new Uri(ControllerFormats.DeleteDokumentumokById.ControllerUrl(id))).Result;
-            }
+
+            var resp = client.GetAsync(new Uri(ControllerFormats.DeleteDokumentumokById.ControllerUrl(id))).Result;
+
         }
         void DokumentumokModify()
         {
@@ -280,16 +265,13 @@ namespace NyilvForms
 
         private void Aremeles(double p)
         {
-            using (var client = new HttpClient())
-            {
-                var resp = client.PostAsJsonAsync(ControllerFormats.Aremeles.ControllerUrl, p).Result;
-                resp.EnsureSuccessStatusCode();
+            var resp = client.PostAsJsonAsync(ControllerFormats.Aremeles.ControllerUrl, p).Result;
+            resp.EnsureSuccessStatusCode();
 
-                if (alapadatokDataGridView.CurrentCell != null)
-                {
-                    UpdateCegadatok(currentCegID);
-                }
-            }
+            if (alapadatokDataGridView.CurrentCell != null)
+            {
+                UpdateCegadatok(currentCegID);
+            }            
         }
     }
 }

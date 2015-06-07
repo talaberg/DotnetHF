@@ -25,33 +25,38 @@ namespace NyilvForms
         bool dataGridViewCellChanged;           //Indicates if a dataGridView cell is modified
         int changedRowIndex;
 
+        UserData user;
+        HttpClient client;
         TreeNode currentnode;                   // Current Dokumentumok TreeNode reference
 
         int currentCegID = 1;                   // Current CegID regerence
         enum ImportCaller { Ceg, Dokumentum };  // Enum for importcommand
         int importcommand;                      // Registers, which import mode called the openFileDialog
+
         public MainWindow()
         {
+
             InitializeComponent();
-            tarifaTextBox.DataBindings["Text"].NullValue = string.Empty;
+            FormMiscellaneousInit();
 
-            //Init ComboBox parameteres
-                //Make ComboBoxes not editable
-            comboBoxFindElement.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxFindCondiditon.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            ComboBoxFindElementInit();
-            comboBoxFindCondiditon.ValueMember = "Name";
-
-            dataGridViewCellChanged = false;
-            alapadatokDataGridView.ReadOnly = true;
-
-            AspAuth();
         }
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Event functions ----------------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            Login userLogin = new Login("Üdvözöljük! Az indításhoz írja be felhasználónevét és jelszavát!");
+            userLogin.ShowDialog();
+            if (userLogin.DialogResult == DialogResult.OK)
+            {
+                user = new UserData(userLogin.Username, userLogin.EncryptedPassword);
+                client = userLogin.Client;
+            }
+            else
+            {
+                this.Close();
+            }
+        }
         //      Main menu events ----------------------------------------------------------------------------------------------------------------------------------------
         // Import Ceg type xls files
         private void cegimportalasaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -282,18 +287,20 @@ namespace NyilvForms
             this.Close();
         }
 
-        private void AspAuth()
+        private void FormMiscellaneousInit()
         {
-            using (var client = new HttpClient())
-            {
-                string enc = Encryption.Encrypt("1990tg");
-                UserData data = new UserData("TG", enc);
-                var resp = client.PostAsJsonAsync(ControllerFormats.Authenticate.ControllerUrl, data).Result;
-                resp.EnsureSuccessStatusCode();
+            tarifaTextBox.DataBindings["Text"].NullValue = string.Empty;
 
-                resp = client.GetAsync(ControllerFormats.GetAlapadatAll.ControllerUrl).Result;
-                resp.EnsureSuccessStatusCode();
-            }
+            //Init ComboBox parameteres
+            //Make ComboBoxes not editable
+            comboBoxFindElement.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxFindCondiditon.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            ComboBoxFindElementInit();
+            comboBoxFindCondiditon.ValueMember = "Name";
+
+            dataGridViewCellChanged = false;
+            alapadatokDataGridView.ReadOnly = true;
         }
 
 
