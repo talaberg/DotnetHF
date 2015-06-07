@@ -12,8 +12,11 @@ using System.Net.Http;
 using System.Net;
 using NyilvLib;
 using NyilvLib.Entities;
+using NyilvForms.Auth;
 
 using System.Text.RegularExpressions;
+
+using Microsoft.Synchronization;
 
 namespace NyilvForms
 {
@@ -42,6 +45,8 @@ namespace NyilvForms
 
             dataGridViewCellChanged = false;
             alapadatokDataGridView.ReadOnly = true;
+
+            AspAuth();
         }
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------
         // Event functions ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -277,12 +282,19 @@ namespace NyilvForms
             this.Close();
         }
 
+        private void AspAuth()
+        {
+            using (var client = new HttpClient())
+            {
+                string enc = Encryption.Encrypt("1990tg");
+                UserData data = new UserData("TG", enc);
+                var resp = client.PostAsJsonAsync(ControllerFormats.Authenticate.ControllerUrl, data).Result;
+                resp.EnsureSuccessStatusCode();
 
-
-
-
-
-
+                resp = client.GetAsync(ControllerFormats.GetAlapadatAll.ControllerUrl).Result;
+                resp.EnsureSuccessStatusCode();
+            }
+        }
 
 
     }

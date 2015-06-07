@@ -5,11 +5,16 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web;
+
 using NyilvLib;
 using NyilvLib.Entities;
-//using System.Data.Entity;
+
 using System.Reflection;
-//using MySql.Data.Entity;
+
+using Nyilv.Auth;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 
 namespace Nyilv.Controllers
 {
@@ -21,15 +26,22 @@ namespace Nyilv.Controllers
         [Route(ControllerFormats.GetAlapadatById.ControllerFormat, Name = ControllerFormats.GetAlapadatById.ControllerName)]
         public IHttpActionResult GetAlapadatok(int id)
         {
-            using (var ctx = new  ModelNyilv())
+            if (User.Identity.IsAuthenticated)
             {
-                var ceg = ctx.Alapadatok.SingleOrDefault(c => c.CegID == id);
-                if (ceg == null)
+                using (var ctx = new ModelNyilv())
                 {
-                    return NotFound();
+                    var ceg = ctx.Alapadatok.SingleOrDefault(c => c.CegID == id);
+                    if (ceg == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(ceg);
+
                 }
-                return Ok(ceg);
-                
+            }
+            else
+            {
+                return NotFound();
             }
         }
         // GET api/Cegadatok/{id}
@@ -70,19 +82,26 @@ namespace Nyilv.Controllers
         [Route(ControllerFormats.GetAlapadatAll.ControllerFormat)]
         public IHttpActionResult GetAll()
         {
-            using (var ctx = new ModelNyilv())
+            if (User.Identity.IsAuthenticated)
             {
-                var cegek = new List<Alapadatok>();
-                foreach (var ceg in ctx.Alapadatok)
+                using (var ctx = new ModelNyilv())
                 {
-                    cegek.Add(ceg);
-                    
+                    var cegek = new List<Alapadatok>();
+                    foreach (var ceg in ctx.Alapadatok)
+                    {
+                        cegek.Add(ceg);
+
+                    }
+                    if (cegek == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(cegek);
                 }
-                if (cegek == null)
-                {
-                    return NotFound();
-                }
-                return Ok(cegek);
+            }
+            else
+            {
+                return NotFound();
             }
         }
         
@@ -447,5 +466,34 @@ namespace Nyilv.Controllers
             }
             return result;
         }
+
+        //Modify Alapadatok element
+        [HttpPost]
+        [Route(ControllerFormats.Authenticate.ControllerFormat)]
+        public IHttpActionResult PostAuth([FromBody]UserData data)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+
+            string userPassword = Decryption.Decyrpt(data.EncryptedPassword);
+
+            var user = userManager.Find(data.Username, userPassword);
+
+            if (user != null)
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+
+                authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
     }
 }

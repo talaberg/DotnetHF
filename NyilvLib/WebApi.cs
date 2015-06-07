@@ -90,5 +90,42 @@ namespace NyilvLib
             public const string ControllerFormat = "api/importDokumentum";
             public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
         }
+        public static class Authenticate
+        {
+            public const string ControllerFormat = "api/Authenticate";
+            public static string ControllerUrl { get { return WebApi.HostAddress + "/" + ControllerFormat; } }
+        }
+    }
+    public class UserData
+    {
+        string username;
+        string encryptedpassword;
+        public UserData(string user, string pass)
+        {
+            username = user;
+            encryptedpassword = pass;
+        }
+        public string Username
+        {
+            get
+            {
+                return username;
+            }
+            set
+            {
+                username = value;
+            }
+        }
+        public string EncryptedPassword
+        {
+            get
+            {
+                return encryptedpassword;
+            }
+            set
+            {
+                encryptedpassword = value;
+            }
+        }
     }
 }

@@ -107,6 +107,7 @@
     <Compile Include="Aremeles.Designer.cs">
       <DependentUpon>Aremeles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Auth\Encryption.cs" />
     <Compile Include="ComboBoxConditionItem.cs" />
     <Compile Include="ComboBoxElementItem.cs" />
     <Compile Include="MainWindow.cs">
