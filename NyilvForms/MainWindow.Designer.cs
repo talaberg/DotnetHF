@@ -90,6 +90,7 @@
             this.modositasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eltavolitasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.aBCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ceg_teljes_nevLabel = new System.Windows.Forms.Label();
             emailLabel = new System.Windows.Forms.Label();
             telefonLabel = new System.Windows.Forms.Label();
@@ -220,7 +221,8 @@
             // eszközökToolStripMenuItem
             // 
             this.eszközökToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aremelesToolStripMenuItem});
+            this.aremelesToolStripMenuItem,
+            this.aBCToolStripMenuItem});
             this.eszközökToolStripMenuItem.Name = "eszközökToolStripMenuItem";
             this.eszközökToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.eszközökToolStripMenuItem.Text = "Eszközök";
@@ -228,7 +230,7 @@
             // aremelesToolStripMenuItem
             // 
             this.aremelesToolStripMenuItem.Name = "aremelesToolStripMenuItem";
-            this.aremelesToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.aremelesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aremelesToolStripMenuItem.Text = "Áremelés...";
             this.aremelesToolStripMenuItem.Click += new System.EventHandler(this.aremelesToolStripMenuItem_Click);
             // 
@@ -686,6 +688,12 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // aBCToolStripMenuItem
+            // 
+            this.aBCToolStripMenuItem.Name = "aBCToolStripMenuItem";
+            this.aBCToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aBCToolStripMenuItem.Text = "ABC";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -788,6 +796,7 @@
         private System.Windows.Forms.ToolStripMenuItem kilepesToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ToolStripMenuItem aBCToolStripMenuItem;
     }
 }
 
