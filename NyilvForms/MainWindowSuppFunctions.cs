@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace NyilvForms
 {
@@ -150,10 +151,10 @@ namespace NyilvForms
                     comboBoxFindCondiditon.Items.Add(new ComboBoxConditionItem() { Name = "Pontosan", Condition = MyQuery.EqualsCondition });
                     break;
                 case TypeCode.Int32:
-                    comboBoxFindCondiditon.Items.Add(new ComboBoxConditionItem() { Name = "Egyenlő", Condition = MyQuery.EqualsCondition });
+                    comboBoxFindCondiditon.Items.Add(new ComboBoxConditionItem() { Name = " = ", Condition = MyQuery.EqualsCondition });
                     break;
                 default:
-                    comboBoxFindCondiditon.Items.Add(new ComboBoxConditionItem() { Name = "Egyenlő", Condition = MyQuery.EqualsCondition });
+                    comboBoxFindCondiditon.Items.Add(new ComboBoxConditionItem() { Name = " = ", Condition = MyQuery.EqualsCondition });
                     break;
             }
 
@@ -272,6 +273,39 @@ namespace NyilvForms
             {
                 UpdateCegadatok(currentCegID);
             }            
+        }
+
+        private void SaveConfig()
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlElement element = (XmlElement)doc.AppendChild(doc.CreateElement("Config"));
+            element.AppendChild(doc.CreateElement("Language")).InnerText = ((ComboboxLanguageItem)comboBoxLanguage.SelectedItem).Culture.ToString();
+            doc.Save("AppConfig.xml");
+        }
+        private void LoadConfig()
+        {
+            XmlDocument doc = new XmlDocument();
+            try 
+	        {
+                doc.Load("AppConfig.xml");
+
+                XmlNode lang = doc.DocumentElement.SelectSingleNode("/Config/Language");
+                if (lang.InnerText == "en")
+                {
+                    comboBoxLanguage.SelectedIndex = 0;
+                }
+                else
+                {
+                    comboBoxLanguage.SelectedIndex = 1;
+                }
+	        }
+            catch (System.IO.FileNotFoundException)
+	        {
+
+                comboBoxLanguage.SelectedIndex = 1;
+	        }
+
+
         }
     }
 }

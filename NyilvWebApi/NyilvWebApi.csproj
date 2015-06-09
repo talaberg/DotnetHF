@@ -186,6 +186,7 @@
     <Compile Include="Auth\Decryption.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NyilvController.cs" />
+    <Compile Include="DatabaseListener.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

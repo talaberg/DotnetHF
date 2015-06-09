@@ -17,6 +17,8 @@ using NyilvForms.Auth;
 using System.Text.RegularExpressions;
 
 using Microsoft.Synchronization;
+using System.Globalization;
+using System.Threading;
 
 namespace NyilvForms
 {
@@ -301,8 +303,54 @@ namespace NyilvForms
 
             dataGridViewCellChanged = false;
             alapadatokDataGridView.ReadOnly = true;
+
+            comboBoxLanguage.Items.Add(new ComboboxLanguageItem(new CultureInfo("en"),"English"));
+            comboBoxLanguage.Items.Add(new ComboboxLanguageItem(new CultureInfo("hu-HU"), "Magyar"));
+            comboBoxLanguage.DisplayMember = "Text";
+            LoadConfig();
+
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("hu-HU");
         }
 
+        private void comboBoxLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxLanguage.SelectedIndex == -1)
+                return;
 
+            CultureInfo ci = ((ComboboxLanguageItem)comboBoxLanguage.SelectedItem).Culture;
+            Thread.CurrentThread.CurrentUICulture = ci;
+            ComponentResourceManager resources = new ComponentResourceManager(this.GetType());
+            ApplyResourceToControl(resources, this);
+            ComponentResourceManager resource = new ComponentResourceManager(typeof(MainWindow));
+            foreach (ToolStripItem item in this.menuStrip1.Items)
+            {
+
+                if (item is ToolStripDropDownItem)
+                    foreach (ToolStripItem dropDownItem in ((ToolStripDropDownItem)item).DropDownItems)
+                    {
+                        resource.ApplyResources(dropDownItem, dropDownItem.Name,ci);
+                    }
+                //Also apply resources to main toolstrip items. 
+                resource.ApplyResources(item, item.Name, ci);
+            }
+            SaveConfig();
+        }
+
+        private static void ApplyResourceToControl(ComponentResourceManager res, Control control)
+        {
+            foreach (Control c in control.Controls)
+                ApplyResourceToControl(res, c);
+
+            var text = res.GetString(String.Format("{0}.Text", control.Name));
+            control.Text = text ?? control.Text;
+        }
+
+        class ComboboxLanguageItem
+        {
+          public ComboboxLanguageItem(CultureInfo value, string text) { Culture = value; Text = text; }
+          public CultureInfo Culture { get; set; }
+          public string Text { get; set; }
+          public override string ToString() { return Text; }
+        }
     }
 }

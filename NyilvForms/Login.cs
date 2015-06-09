@@ -17,6 +17,7 @@ namespace NyilvForms
     {
         string encryptedPassword;
         string userName;
+        string text;
         HttpClient client;
         public string Username { get { return userName; } }
         public string EncryptedPassword { get { return encryptedPassword; } }
@@ -25,19 +26,30 @@ namespace NyilvForms
         {
             InitializeComponent();
 
+            this.text = text;
             labelText.Text = text;
 
             StartPosition = FormStartPosition.CenterParent;
+
+            progressBar.Visible = false;
+            progressBar.Maximum = 10;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            labelText.Text = "Autentikáció...";
+            progressBar.Visible = true;
+            progressBar.Value = 2;
             userName = textBoxUsername.Text;
             encryptedPassword = Encryption.Encrypt(textBoxPassword.Text);
-
+            progressBar.Value = 5;
             UserData data = new UserData(userName, encryptedPassword);
             client = new HttpClient();
+            progressBar.Value = 7;
             var resp = client.PostAsJsonAsync(ControllerFormats.Authenticate.ControllerUrl, data).Result;
+            progressBar.Value = 10;
+            labelText.Text = text;
+            progressBar.Visible = false;
             if (resp.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 this.DialogResult = DialogResult.OK;
@@ -54,6 +66,14 @@ namespace NyilvForms
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void textBoxUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonOK_Click(sender, (EventArgs)e);
+            }
         }
     }
 }

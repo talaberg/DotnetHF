@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Diagnostics;
 
 namespace Nyilv
 {
@@ -19,6 +20,8 @@ namespace Nyilv
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            Trace.Listeners.Add(new TextWriterTraceListener(@"C:\Users\TG\BME-Cubby\DotnetHF\DotnetHF\NyilvWebApi\Trace_WebApi.log", "WebApiListener"));            
         }
     }
 }

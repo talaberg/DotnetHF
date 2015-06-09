@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web;
+using System.Diagnostics;
 
 using NyilvLib;
 using NyilvLib.Entities;
@@ -33,14 +34,21 @@ namespace Nyilv.Controllers
                     var ceg = ctx.Alapadatok.SingleOrDefault(c => c.CegID == id);
                     if (ceg == null)
                     {
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetAlapadatById.ControllerFormat + " error: data not found.");
+                        Trace.Flush();
                         return NotFound();
                     }
-                    return Ok(ceg);
-
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetAlapadatById.ControllerFormat + " success: data sent.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: GetAlapadatok id " + id.ToString());
+                    DatabaseListener.Trace.Flush();
+                    return Ok(ceg);                    
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetAlapadatById.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -56,13 +64,21 @@ namespace Nyilv.Controllers
                     var ceg = ctx.Cegadatok.SingleOrDefault(c => c.CegID == id);
                     if (ceg == null)
                     {
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetCegadatokById.ControllerFormat + " error: data not found.");
+                        Trace.Flush();
                         return NotFound();
                     }
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetCegadatokById.ControllerFormat + " success: data sent.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: GetCegadatok id " + id.ToString());
+                    DatabaseListener.Trace.Flush();
                     return Ok(ceg);
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetCegadatokById.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
 
@@ -80,13 +96,21 @@ namespace Nyilv.Controllers
                     var doc = ctx.Dokumentumok.Where(c => c.CegID == id).ToList<Dokumentumok>();
                     if (doc == null)
                     {
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetDokumentumokById.ControllerFormat + " error: data not found.");
+                        Trace.Flush();
                         return NotFound();
                     }
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetDokumentumokById.ControllerFormat + " success: data updated.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: GetDokumentumok id " + id.ToString());
+                    DatabaseListener.Trace.Flush();
                     return Ok(doc);
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetDokumentumokById.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
 
@@ -106,15 +130,24 @@ namespace Nyilv.Controllers
                         cegek.Add(ceg);
 
                     }
-                    if (cegek == null)
+                    if (cegek.Count == 0)
                     {
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetAlapadatAll.ControllerFormat + " error: data not found.");
+                        Trace.Flush();
                         return NotFound();
                     }
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetAlapadatAll.ControllerFormat + " succes: data sent.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: GetAlapadatokAll");
+                    DatabaseListener.Trace.Flush();
                     return Ok(cegek);
+                    
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.GetAlapadatAll.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -126,6 +159,8 @@ namespace Nyilv.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: FindQuery");
+                DatabaseListener.Trace.Flush();
                 using (var ctx = new ModelNyilv())
                 {
                     List<Alapadatok> result = null;
@@ -215,13 +250,19 @@ namespace Nyilv.Controllers
 
                     if (result == null)
                     {
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.FindAlapadat.ControllerFormat + " succes: data not found.");
+                        Trace.Flush();
                         return NotFound();
                     }
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.FindAlapadat.ControllerFormat + " succes: data sent.");
+                    Trace.Flush();
                     return Ok(result);
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.FindAlapadat.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
 
@@ -248,11 +289,17 @@ namespace Nyilv.Controllers
                     }
                     ctx.SaveChanges();
 
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.UpdateAlapadat.ControllerFormat + " succes: data updated.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: UpdateAlapadat at id " + adat.CegID.ToString());
+                    DatabaseListener.Trace.Flush();
                     return Ok();
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.UpdateAlapadat.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -276,12 +323,17 @@ namespace Nyilv.Controllers
                         ctx.Entry(Item2Modify).CurrentValues.SetValues(adat);
                     }
                     ctx.SaveChanges();
-
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.UpdateCegadatok.ControllerFormat + " success: data updated.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: UpdateCegadat at id " + adat.CegID.ToString());
+                    DatabaseListener.Trace.Flush();
                     return Ok();
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.UpdateCegadatok.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -306,11 +358,17 @@ namespace Nyilv.Controllers
                     }
                     ctx.SaveChanges();
 
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.UpdateDokumentumok.ControllerFormat + " succes: data updated.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: UpdateDokumentumok at id " + adat.DokumentumID.ToString());
+                    DatabaseListener.Trace.Flush();
                     return Ok();
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.UpdateDokumentumok.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -332,12 +390,18 @@ namespace Nyilv.Controllers
                     {
                         ctx.Alapadatok.Remove(ceg);
                         ctx.SaveChanges();
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteAlapadatById.ControllerFormat + " succes: data removed.");
+                        Trace.Flush();
+                        DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: RemoveAlapadat with id " + id.ToString());
+                        DatabaseListener.Trace.Flush();
                         return Ok();
                     }
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteAlapadatById.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -353,18 +417,26 @@ namespace Nyilv.Controllers
                     Cegadatok ceg = ctx.Cegadatok.Where(c => c.CegID == id).FirstOrDefault<Cegadatok>();
                     if (ceg == null)
                     {
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteCegadatokById.ControllerFormat + " error: data not found.");
+                        Trace.Flush();
                         return NotFound();
                     }
                     else
                     {
                         ctx.Cegadatok.Remove(ceg);
                         ctx.SaveChanges();
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteCegadatokById.ControllerFormat + " succes: data removed.");
+                        Trace.Flush();
+                        DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: RemoveCegadat with id " + id.ToString());
+                        DatabaseListener.Trace.Flush();
                         return Ok();
                     }
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteCegadatokById.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -386,12 +458,18 @@ namespace Nyilv.Controllers
                     {
                         ctx.Dokumentumok.Remove(doc);
                         ctx.SaveChanges();
+                        Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteDokumentumokById.ControllerFormat + " succes: data removed.");
+                        Trace.Flush();
+                        DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: RemoveDokumentum with id " + id.ToString());
+                        DatabaseListener.Trace.Flush();
                         return Ok();
                     }
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.DeleteDokumentumokById.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -413,11 +491,17 @@ namespace Nyilv.Controllers
                         }
                     }
                     ctx.SaveChanges();
+                    Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.Aremeles.ControllerFormat + " succes.");
+                    Trace.Flush();
+                    DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: Aremeles with value " + ar.ToString());
+                    DatabaseListener.Trace.Flush();
                     return Ok();
                 }
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.Aremeles.ControllerFormat + " error: authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
         }
@@ -476,6 +560,8 @@ namespace Nyilv.Controllers
                     ctx.SaveChanges();
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: importCeg");
+                DatabaseListener.Trace.Flush();
             }
             else
             {
@@ -524,6 +610,8 @@ namespace Nyilv.Controllers
                     ctx.SaveChanges();
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+                DatabaseListener.Trace.WriteLine(DateTime.Now.ToString() + ": user: " + User.Identity.Name.ToString() + "transaction: importDokumentum");
+                DatabaseListener.Trace.Flush();
             }
             else
             {
@@ -551,10 +639,14 @@ namespace Nyilv.Controllers
 
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
 
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.Authenticate.ControllerFormat + " user: " + data.Username + " : authenitcated.");
+                Trace.Flush();
                 return Ok();
             }
             else
             {
+                Trace.TraceInformation(DateTime.Now.ToString() + ": " + ControllerFormats.Authenticate.ControllerFormat + " user: " + data.Username + " : authentication failed.");
+                Trace.Flush();
                 return NotFound();
             }
 
